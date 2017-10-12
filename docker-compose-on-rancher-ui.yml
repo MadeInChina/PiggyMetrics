@@ -25,8 +25,8 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: sqshq/piggymetrics-registry
     restart: always
-    depends_on:
-      config
+    links:
+      - config
     ports:
       - 8761:8761
     logging:
@@ -39,8 +39,8 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: sqshq/piggymetrics-gateway
     restart: always
-    depends_on:
-      config
+    links:
+      - config
     ports:
       - 80:4000
     logging:
@@ -57,8 +57,8 @@ services:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: sqshq/piggymetrics-auth-service
     restart: always
-    depends_on:
-      config
+    links:
+      - config
     logging:
       options:
         max-size: "10m"
@@ -81,8 +81,8 @@ services:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: sqshq/piggymetrics-account-service
     restart: always
-    depends_on:
-      config
+    links:
+      - config
     logging:
       options:
         max-size: "10m"
@@ -106,8 +106,8 @@ services:
       STATISTICS_SERVICE_PASSWORD: $STATISTICS_SERVICE_PASSWORD
     image: sqshq/piggymetrics-statistics-service
     restart: always
-    depends_on:
-      config
+    links:
+      - config
     logging:
       options:
         max-size: "10m"
@@ -130,8 +130,8 @@ services:
       NOTIFICATION_SERVICE_PASSWORD: $NOTIFICATION_SERVICE_PASSWORD
     image: sqshq/piggymetrics-notification-service
     restart: always
-    depends_on:
-      config
+    links:
+      - config
     logging:
       options:
         max-size: "10m"
@@ -152,8 +152,8 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: sqshq/piggymetrics-monitoring
     restart: always
-    depends_on:
-      config
+    links:
+      - config
     ports:
       - 9000:8080
       - 8989:8989
