@@ -5,15 +5,15 @@ services:
       - 5672:5672
 
   config:
-    build: config
+    build: config-service
     ports:
       - 8888:8888
 
   registry:
-    build: registry
+    build: registry-service
 
   gateway:
-    build: gateway
+    build: gateway-service
 
   auth-service:
     build: auth-service
@@ -56,4 +56,4 @@ services:
       - 28000:27017
 
   monitoring:
-    build: monitoring
+    build: monitoring-service
