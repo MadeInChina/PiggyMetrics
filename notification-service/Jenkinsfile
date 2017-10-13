@@ -1,4 +1,7 @@
 node {
+    // Setup the Docker Registry (Docker Hub) + Credentials
+    registry_url = "https://index.docker.io/v1/" // Docker Hub
+    docker_creds_id = "slam-docker-hub" // name of the Jenkins Credentials ID
 
     withMaven(maven:'maven') {
 
@@ -7,16 +10,21 @@ node {
         }
 
         stage('Build') {
-            sh 'mvn clean install'
+           dir ('notification-service') {
+                sh 'mvn clean install'
 
-            def pom = readMavenPom file:'pom.xml'
-            print pom.version
-            env.version = pom.version
+                def pom = readMavenPom file:'pom.xml'
+                print pom.version
+                env.version = pom.version
+            }
         }
 
-        stage('Image') {
+        stage('Image Build And Publish') {
             dir ('notification-service') {
-                docker.build "slamhan/monitoring-service:latest"
+                docker.withRegistry("${registry_url}", "${docker_creds_id}") {
+                     def app =  docker.build "slamhan/piggymetrics-notification-service:latest"
+                     app.push()
+                }
             }
         }
 
