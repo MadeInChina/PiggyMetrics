@@ -18,17 +18,17 @@ node {
         }
 
         stage('Image Build And Push') {
-            dir ('config-service') {
+            dir ('config-server') {
              docker.withRegistry("${registry_url}", "${docker_creds_id}") {
-                    def app = docker.build "slamhan/piggymetrics-config-service:latest"
+                    def app = docker.build "slamhan/piggymetrics-config-server:latest"
                     app.push()
                 }
             }
         }
 
         stage ('Upgrade') {
-            dir ('config-service') {
-            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -p Applications up config --force-upgrade -p -c -d'
+            dir ('config-server') {
+            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -p Applications up config-server --force-upgrade -p -c -d'
             //docker.image("slamhan/discovery-service:${env.version}-${env.BUILD_NUMBER}").run('-p 8761:8761 -h discovery --name discovery')
             }
         }

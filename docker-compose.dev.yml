@@ -5,12 +5,12 @@ services:
       - 5672:5672
 
   config:
-    build: config-service
+    build: config-server
     ports:
       - 8888:8888
 
   registry:
-    build: registry-service
+    build: registry-server
 
   gateway:
     build: gateway-service

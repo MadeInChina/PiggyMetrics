@@ -10,23 +10,23 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  config:
+  config-server:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-config-service
+    image: slamhan/piggymetrics-config-server
     restart: always
     logging:
       options:
         max-size: "10m"
         max-file: "10"
 
-  registry:
+  registry-server:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-registry-service
+    image: slamhan/piggymetrics-registry-server
     restart: always
     links:
-      - config
+      - config-server
     ports:
       - 8761:8761
     logging:
@@ -34,13 +34,13 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  gateway:
+  gateway-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: slamhan/piggymetrics-gateway-service
     restart: always
     links:
-      - config
+      - config-server
     ports:
       - 4000:4000
     logging:
@@ -58,7 +58,7 @@ services:
     image: slamhan/piggymetrics-auth-service
     restart: always
     links:
-      - config
+      - config-server
     logging:
       options:
         max-size: "10m"
@@ -82,7 +82,7 @@ services:
     image: slamhan/piggymetrics-account-service
     restart: always
     links:
-      - config
+      - config-server
     logging:
       options:
         max-size: "10m"
@@ -107,7 +107,7 @@ services:
     image: slamhan/piggymetrics-statistics-service
     restart: always
     links:
-      - config
+      - config-server
     logging:
       options:
         max-size: "10m"
@@ -131,7 +131,7 @@ services:
     image: slamhan/piggymetrics-notification-service
     restart: always
     links:
-      - config
+      - config-server
     logging:
       options:
         max-size: "10m"
@@ -147,13 +147,13 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  monitoring:
+  monitoring-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: slamhan/piggymetrics-monitoring-service
     restart: always
     links:
-      - config
+      - config-server
     ports:
       - 9000:8080
       - 8989:8989

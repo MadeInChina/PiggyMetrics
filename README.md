@@ -73,7 +73,7 @@ spring:
     name: notification-service
   cloud:
     config:
-      uri: http://config:8888
+      uri: http://config-server:8888
       fail-fast: true
 ```
 
@@ -248,7 +248,7 @@ If you'd like to build images yourself (with some changes in the code, for examp
 - http://localhost:15672 - RabbitMq management (default login/password: guest/guest)
 
 #### Notes
-All Spring Boot applications require already running [Config Server](https://github.com/sqshq/PiggyMetrics#config-service) for startup. But we can start all containers simultaneously because of `depends_on` docker-compose option.
+All Spring Boot applications require already running [Config Server](https://github.com/sqshq/PiggyMetrics#config-server) for startup. But we can start all containers simultaneously because of `depends_on` docker-compose option.
 
 Also, Service Discovery mechanism needs some time after all applications startup. Any service is not available for discovery by clients until the instance, the Eureka server and the client all have the same metadata in their local cache, so it could take 3 heartbeats. Default heartbeat period is 30 seconds.
 
