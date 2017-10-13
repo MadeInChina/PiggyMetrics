@@ -9,11 +9,13 @@ node {
         }
 
         stage('Build') {
-            sh 'mvn clean install'
+            dir ('account-service') {
+                sh 'mvn clean install'
 
-            def pom = readMavenPom file:'pom.xml'
-            print pom.version
-            env.version = pom.version
+                def pom = readMavenPom file:'pom.xml'
+                print pom.version
+                env.version = pom.version
+            }
         }
 
         stage('Image') {
