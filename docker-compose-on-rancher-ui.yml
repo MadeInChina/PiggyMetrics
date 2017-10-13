@@ -13,7 +13,7 @@ services:
   config:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-config
+    image: slamhan/piggymetrics-config-service
     restart: always
     logging:
       options:
@@ -23,7 +23,7 @@ services:
   registry:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-registry
+    image: slamhan/piggymetrics-registry-service
     restart: always
     links:
       - config
@@ -37,7 +37,7 @@ services:
   gateway:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-gateway
+    image: slamhan/piggymetrics-gateway-service
     restart: always
     links:
       - config
@@ -150,7 +150,7 @@ services:
   monitoring:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-monitoring
+    image: slamhan/piggymetrics-monitoring-service
     restart: always
     links:
       - config

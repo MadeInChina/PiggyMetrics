@@ -20,8 +20,7 @@ node {
         stage('Image Build And Push') {
             dir ('config-service') {
              docker.withRegistry("${registry_url}", "${docker_creds_id}") {
-                    //def app = docker.build "slamhan/piggymetrics-config:${env.version}-${env.BUILD_NUMBER}"
-                    def app = docker.build "slamhan/piggymetrics-config:latest"
+                    def app = docker.build "slamhan/piggymetrics-config-service:latest"
                     app.push()
                 }
             }
