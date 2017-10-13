@@ -42,7 +42,7 @@ services:
     links:
       - config
     ports:
-      - 80:4000
+      - 4000:4000
     logging:
       options:
         max-size: "10m"
