@@ -3,7 +3,7 @@ spring:
     name: statistics-service
   cloud:
     config:
-      uri: http://config-sevice:8888
+      uri: http://config-server:8888
       fail-fast: true
       password: ${CONFIG_SERVICE_PASSWORD}
       username: user
