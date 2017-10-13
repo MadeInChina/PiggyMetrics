@@ -17,7 +17,7 @@ node {
             env.version = pom.version
         }
 
-        stage('Image') {
+        stage('Image Build And Push') {
             dir ('config-service') {
              docker.withRegistry("${registry_url}", "${docker_creds_id}") {
                     //def app = docker.build "slamhan/piggymetrics-config:${env.version}-${env.BUILD_NUMBER}"
