@@ -147,10 +147,10 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  monitoring-service:
+  monitoring-server:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-monitoring-service
+    image: slamhan/piggymetrics-monitoring-server
     restart: always
     links:
       - config-server
