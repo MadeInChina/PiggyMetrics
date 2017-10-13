@@ -5,29 +5,29 @@ catalog:
       label: "Config service password"
       description: "Config service password"
       required: true
-      default: password
+      default: "password"
       type: "password"
     - variable: "NOTIFICATION_SERVICE_PASSWORD"
       label: "Notification service password"
       description: "Notification service password"
       required: true
-      default: password
+      default: "password"
       type: "password"
     - variable: "STATISTICS_SERVICE_PASSWORD"
       label: "Statistics service password"
       description: "Statistics service password"
       required: true
-      default: password
+      default: "password"
       type: "password"
     - variable: "ACCOUNT_SERVICE_PASSWORD"
       label: "Account service password"
       description: "Account service password"
       required: true
-      default: password
+      default: "password"
       type: "password"
     - variable: "MONGODB_PASSWORD"
       label: "Mongodb password"
       description: "mongodb password"
       required: true
-      default: password
+      default: "password"
       type: "password"

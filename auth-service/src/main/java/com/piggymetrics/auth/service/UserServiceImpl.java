@@ -12,24 +12,24 @@ import org.springframework.util.Assert;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-	@Autowired
-	private UserRepository repository;
+    @Autowired
+    private UserRepository repository;
 
-	@Override
-	public void create(User user) {
+    @Override
+    public void create(User user) {
 
-		User existing = repository.findOne(user.getUsername());
-		Assert.isNull(existing, "user already exists: " + user.getUsername());
+        User existing = repository.findOne(user.getUsername());
+        Assert.isNull(existing, "user already exists: " + user.getUsername());
 
-		String hash = encoder.encode(user.getPassword());
-		user.setPassword(hash);
+        String hash = encoder.encode(user.getPassword());
+        user.setPassword(hash);
 
-		repository.save(user);
+        repository.save(user);
 
-		log.info("new user has been created: {}", user.getUsername());
-	}
+        log.info("new user has been created: {}", user.getUsername());
+    }
 }
