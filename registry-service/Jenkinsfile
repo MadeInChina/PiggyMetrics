@@ -1,4 +1,7 @@
 node {
+    // Setup the Docker Registry (Docker Hub) + Credentials
+    registry_url = "https://index.docker.io/v1/" // Docker Hub
+    docker_creds_id = "slam-docker-hub" // name of the Jenkins Credentials ID
 
     withMaven(maven:'maven') {
 
@@ -16,9 +19,11 @@ node {
 
         stage('Image') {
             dir ('registry-service') {
-                //def app = docker.build "slamhan/config-service:${env.version}-${env.BUILD_NUMBER}"
-                def app = docker.build "slamhan/registry-service:latest"
-                // requested access to the resource is denied app.push()
+                docker.withRegistry("${registry_url}", "${docker_creds_id}") {
+                   //def app = docker.build "slamhan/piggymetrics-registry:${env.version}-${env.BUILD_NUMBER}"
+                   def app = docker.build "slamhan/piggymetrics-registry:latest"
+                   app.push()
+               }
             }
         }
 
