@@ -86,7 +86,6 @@ public class AuthApplication {
 
             // TODO persist clients details
 
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxx"+env.getProperty("ACCOUNT_SERVICE_PASSWORD"));
             // @formatter:off
             clients.inMemory()
                     .withClient("browser")
@@ -94,7 +93,7 @@ public class AuthApplication {
                     .scopes("ui")
                     .and()
                     .withClient("account-service")
-//                    .secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
+                    .secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
                     .authorizedGrantTypes("client_credentials", "refresh_token")
                     .scopes("server")
                     .and()
