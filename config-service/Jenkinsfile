@@ -16,9 +16,9 @@ node {
 
         stage('Image') {
             dir ('config-service') {
-                //def app = docker.build "slamhan/config-service:${env.version}-${env.BUILD_NUMBER}"
-                def app = docker.build "slamhan/config-service:latest"
-                // requested access to the resource is denied app.push()
+                //def app = docker.build "slamhan/piggymetrics-config:${env.version}-${env.BUILD_NUMBER}"
+                def app = docker.build "slamhan/piggymetrics-config:latest"
+                app.push()
             }
         }
 

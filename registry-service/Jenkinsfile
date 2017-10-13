@@ -1,0 +1,32 @@
+node {
+
+    withMaven(maven:'maven') {
+
+        stage('Checkout') {
+            git url: 'https://github.com/MadeInChina/PiggyMetrics.git', credentialsId: 'github-slam', branch: 'master'
+        }
+
+        stage('Build') {
+            sh 'mvn clean install'
+
+            def pom = readMavenPom file:'pom.xml'
+            print pom.version
+            env.version = pom.version
+        }
+
+        stage('Image') {
+            dir ('registry-service') {
+                //def app = docker.build "slamhan/config-service:${env.version}-${env.BUILD_NUMBER}"
+                def app = docker.build "slamhan/registry-service:latest"
+                // requested access to the resource is denied app.push()
+            }
+        }
+
+        stage ('Upgrade') {
+            dir ('registry-service') {
+            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -p Applications up registry --force-upgrade -p -c -d'
+            }
+        }
+    }
+
+}

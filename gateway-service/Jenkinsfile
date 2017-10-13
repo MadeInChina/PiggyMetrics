@@ -1,0 +1,30 @@
+node {
+
+    withMaven(maven:'maven') {
+
+        stage('Checkout') {
+            git url: 'https://github.com/MadeInChina/PiggyMetrics.git', credentialsId: 'github-slam', branch: 'master'
+        }
+
+        stage('Build') {
+            sh 'mvn clean install'
+
+            def pom = readMavenPom file:'pom.xml'
+            print pom.version
+            env.version = pom.version
+        }
+
+        stage('Image') {
+            dir ('gateway-service') {
+                docker.build "slamhan/gateway-service:latest"
+            }
+        }
+
+        stage ('Upgrade') {
+            dir ('gateway-service') {
+            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -p Applications up gateway --force-upgrade -p -c -d'
+            }
+        }
+    }
+
+}
