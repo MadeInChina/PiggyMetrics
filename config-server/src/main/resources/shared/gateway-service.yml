@@ -21,25 +21,25 @@ zuul:
         path: /uaa/**
         url: http://auth-service:5000
         stripPrefix: false
-        sensitiveHeaders:
+        sensitiveHeaders: Cookie,Set-Cookie
 
     account-service:
         path: /accounts/**
         serviceId: account-service
         stripPrefix: false
-        sensitiveHeaders:
+        sensitiveHeaders: Cookie,Set-Cookie
 
     statistics-service:
         path: /statistics/**
         serviceId: statistics-service
         stripPrefix: false
-        sensitiveHeaders:
+        sensitiveHeaders: Cookie,Set-Cookie
 
     notification-service:
         path: /notifications/**
         serviceId: notification-service
         stripPrefix: false
-        sensitiveHeaders:
+        sensitiveHeaders: Cookie,Set-Cookie
 
 server:
   port: 4000
