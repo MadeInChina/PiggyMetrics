@@ -2,14 +2,17 @@ spring:
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/shared
-  profiles:
-     active: native
+        git:
+          uri: https://github.com/yiping999/config-repo
+#        native:
+#          search-locations: classpath:/shared
+#  profiles:
+#     active: native
 
 server:
   port: 8888
 
 security:
   user:
-    password: ${CONFIG_SERVICE_PASSWORD}
+    username: user
+    password: password
