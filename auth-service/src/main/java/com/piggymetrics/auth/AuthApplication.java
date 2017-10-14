@@ -58,7 +58,7 @@ public class AuthApplication {
                     .passwordEncoder(new BCryptPasswordEncoder());
         }
 
-//        @Override
+        @Override
         @Bean
         public AuthenticationManager authenticationManagerBean() throws Exception {
             return super.authenticationManagerBean();

@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
+@PreAuthorize("#oauth2.hasScope('server')")
 @RequestMapping("/users")
 public class UserController {
 
@@ -24,7 +25,6 @@ public class UserController {
         return principal;
     }
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(method = RequestMethod.POST)
     public void createUser(@Valid @RequestBody User user) {
         userService.create(user);
