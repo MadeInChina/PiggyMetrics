@@ -1,6 +1,8 @@
 logging:
   level:
     org.springframework.security: DEBUG
+    org.springframework.cloud.netflix.turbine: DEBUG
+    org.springframework.cloud.netflix.hystrix: DEBUG
 
 hystrix:
   command:
