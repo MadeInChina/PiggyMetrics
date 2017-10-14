@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,8 +28,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 @SpringBootApplication
-@EnableResourceServer
-@EnableDiscoveryClient
+//@EnableResourceServer
+//@EnableDiscoveryClient
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AuthApplication {
 
@@ -37,6 +39,7 @@ public class AuthApplication {
 
     @Configuration
     @EnableWebSecurity
+    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
     protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
