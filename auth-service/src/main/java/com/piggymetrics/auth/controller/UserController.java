@@ -24,7 +24,7 @@ public class UserController {
         return principal;
     }
 
-    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
+    @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(method = RequestMethod.POST)
     public void createUser(@Valid @RequestBody User user) {
         userService.create(user);
