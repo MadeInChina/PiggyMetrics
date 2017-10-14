@@ -39,7 +39,6 @@ public class AuthApplication {
 
     @Configuration
     @EnableWebSecurity
-    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
     protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
