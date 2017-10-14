@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
-@PreAuthorize("#oauth2.hasScope('server')")
 @RequestMapping("/users")
 public class UserController {
 
@@ -25,6 +24,7 @@ public class UserController {
         return principal;
     }
 
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @RequestMapping(method = RequestMethod.POST)
     public void createUser(@Valid @RequestBody User user) {
         userService.create(user);
