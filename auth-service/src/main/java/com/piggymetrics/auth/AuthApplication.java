@@ -96,7 +96,7 @@ public class AuthApplication {
                     .secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
                     .authorizedGrantTypes("client_credentials", "refresh_token")
                     .scopes("server")
-                    .autoApprove(true)
+                    .authorities("ROLE_ANONYMOUS")
                     .and()
                     .withClient("statistics-service")
                     .secret(env.getProperty("STATISTICS_SERVICE_PASSWORD"))
