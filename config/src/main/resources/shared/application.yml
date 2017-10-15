@@ -1,0 +1,31 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka/
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://auth-service:5000/uaa/users/current
+      filter-order : 3
+    
+spring:
+  rabbitmq:
+    host: rabbitmq
+  zipkin:
+    base-url: http://tracing:11008    
+    
+logging:
+  level:
+     org.springframework.cloud.netflix.turbine: DEBUG
+     org.springframework.cloud.netflix.hystrix: DEBUG    

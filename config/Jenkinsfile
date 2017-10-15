@@ -1,0 +1,37 @@
+node {
+    // Setup the Docker Registry (Docker Hub) + Credentials
+    registry_url = "https://index.docker.io/v1/" // Docker Hub
+    docker_creds_id = "slam-docker-hub" // name of the Jenkins Credentials ID
+
+    withMaven(maven:'maven') {
+
+        stage('Checkout') {
+            git url: 'https://github.com/MadeInChina/PiggyMetrics.git', credentialsId: 'github-slam', branch: 'master'
+        }
+
+        stage('Build') {
+            sh 'mvn clean install'
+
+            def pom = readMavenPom file:'pom.xml'
+            print pom.version
+            env.version = pom.version
+        }
+
+        stage('Image Build And Push') {
+            dir ('config') {
+             docker.withRegistry("${registry_url}", "${docker_creds_id}") {
+                    def app = docker.build "slamhan/piggymetrics-config:latest"
+                    app.push()
+                }
+            }
+        }
+
+        stage ('Upgrade') {
+            dir ('config') {
+            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -p Applications up config --force-upgrade -p -c -d'
+            //docker.image("slamhan/discovery-service:${env.version}-${env.BUILD_NUMBER}").run('-p 8761:8761 -h discovery --name discovery')
+            }
+        }
+    }
+
+}

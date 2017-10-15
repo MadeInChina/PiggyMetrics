@@ -1,6 +1,6 @@
 spring:
   application:
-    name: notification-service
+    name: gateway
   cloud:
     config:
       uri: http://config:8888
