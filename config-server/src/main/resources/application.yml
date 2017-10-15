@@ -2,12 +2,10 @@ spring:
   cloud:
     config:
       server:
-        git:
-          uri: https://github.com/yiping999/config-repo
-#        native:
-#          search-locations: classpath:/shared
-#  profiles:
-#     active: native
+        native:
+          search-locations: classpath:/shared
+  profiles:
+     active: native
 
 server:
   port: 8888
