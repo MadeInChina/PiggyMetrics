@@ -1,6 +1,5 @@
 package com.piggymetrics.account.service;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.piggymetrics.account.client.AuthServiceClient;
 import com.piggymetrics.account.client.StatisticsServiceClient;
 import com.piggymetrics.account.domain.Account;
@@ -40,15 +39,10 @@ public class AccountServiceImpl implements AccountService {
 		return repository.findByName(accountName);
 	}
 
-	public String fallbackA(Throwable e){
-		return "call hello2 fallback";
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	@HystrixCommand
 	public Account create(User user) {
 
 		Account existing = repository.findByName(user.getUsername());

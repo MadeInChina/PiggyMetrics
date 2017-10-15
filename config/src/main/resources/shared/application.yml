@@ -5,6 +5,10 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
+  stream:
+      maxConcurrentConnections: 20
+      bus:
+        enabled: true
 
 turbine:
   aggregator:
