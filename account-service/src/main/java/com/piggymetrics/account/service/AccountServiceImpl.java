@@ -48,7 +48,7 @@ public class AccountServiceImpl implements AccountService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@HystrixCommand(fallbackMethod = "fallbackA")
+	@HystrixCommand
 	public Account create(User user) {
 
 		Account existing = repository.findByName(user.getUsername());
