@@ -6,6 +6,11 @@ hystrix:
           thread:
             timeoutInMilliseconds: 10000
 
+turbine:
+  aggregator:
+    clusterConfig: account-service
+  appConfig: account-service
+
 eureka:
   instance:
     prefer-ip-address: true
