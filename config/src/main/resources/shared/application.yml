@@ -10,6 +10,7 @@ hystrix:
       bus:
         enabled: true
       queue:
+        prefixMetricName: false
         send-id: false
         sendId: false
       amqp:
