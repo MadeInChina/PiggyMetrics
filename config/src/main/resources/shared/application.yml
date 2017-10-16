@@ -11,9 +11,7 @@ hystrix:
         enabled: true
 
 turbine:
-  aggregator:
-    clusterConfig: account-service
-  appConfig: account-service
+  combine-host-port: true
 
 eureka:
   instance:
