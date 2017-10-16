@@ -29,6 +29,7 @@ security:
     
 spring:
   application:
+    index: ${random.uuid}
   rabbitmq:
     host: rabbitmq
   zipkin:
