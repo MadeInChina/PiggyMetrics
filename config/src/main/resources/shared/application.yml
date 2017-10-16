@@ -9,6 +9,13 @@ hystrix:
       maxConcurrentConnections: 20
       bus:
         enabled: true
+      queue:
+        prefixMetricName: false
+        send-id: false
+        sendId: false
+      amqp:
+        send-id: false
+        sendId: false
 
 turbine:
   combine-host-port: true
@@ -16,7 +23,7 @@ turbine:
 eureka:
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ipAddress}:${server.port}:${random.uuid}
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
   client:
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
