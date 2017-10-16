@@ -28,7 +28,7 @@ node {
 
         stage ('Upgrade') {
             dir ('config') {
-            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -p Applications up config --force-upgrade -p -c -d'
+            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -env-file ../secrets -p Applications up config --force-upgrade -p -c -d'
             //docker.image("slamhan/discovery-service:${env.version}-${env.BUILD_NUMBER}").run('-p 8761:8761 -h discovery --name discovery')
             }
         }
