@@ -28,8 +28,8 @@ security:
       filter-order : 3
     
 spring:
-#  application:
-#    index: ${random.uuid}
+  application:
+    index: ${random.uuid}
   rabbitmq:
     host: rabbitmq
   zipkin:
