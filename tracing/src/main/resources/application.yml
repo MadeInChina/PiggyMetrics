@@ -1,0 +1,5 @@
+server:
+  port: ${PORT:11008}
+spring:
+  application:
+    name : tracing

@@ -161,3 +161,15 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  tracing:
+    image: slamhan/piggymetrics-tracing
+    restart: always
+    links:
+      - config
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - 11008:11008
