@@ -11,6 +11,8 @@ hystrix:
         enabled: true
       queue:
         send-id: false
+      amqp:
+        send-id: false
 
 turbine:
   combine-host-port: true
