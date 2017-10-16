@@ -29,7 +29,7 @@ security:
     
 spring:
   application:
-    index: ${random.uuid} #make the application unique on the rancher container service layer,same service but with multi-instances.
+    index: ${random.uuid} #make the application unique on the rancher container layer,same service but with multi-instances.
   rabbitmq:
     host: rabbitmq
   zipkin:
