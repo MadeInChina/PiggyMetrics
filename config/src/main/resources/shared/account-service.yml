@@ -16,6 +16,10 @@ spring:
       database: piggymetrics
       port: 27017
 
+feign:
+  hystrix:
+    enabled: true
+
 server:
   context-path: /accounts
   port: 6000
