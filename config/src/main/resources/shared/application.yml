@@ -16,7 +16,7 @@ turbine:
 eureka:
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ipAddress}:${server.port}:${random.uuid}
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
   client:
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
@@ -28,8 +28,8 @@ security:
       filter-order : 3
     
 spring:
-  application:
-    index: ${random.uuid}
+#  application:
+#    index: ${random.uuid}
   rabbitmq:
     host: rabbitmq
   zipkin:
