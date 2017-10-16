@@ -9,6 +9,8 @@ hystrix:
       maxConcurrentConnections: 20
       bus:
         enabled: true
+      queue:
+        send-id: false
 
 turbine:
   combine-host-port: true
