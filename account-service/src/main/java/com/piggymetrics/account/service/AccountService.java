@@ -2,7 +2,9 @@ package com.piggymetrics.account.service;
 
 import com.piggymetrics.account.domain.Account;
 import com.piggymetrics.account.domain.User;
+import org.springframework.cloud.netflix.feign.FeignClient;
 
+@FeignClient(name = "account-service")
 public interface AccountService {
 
     /**
@@ -31,10 +33,4 @@ public interface AccountService {
      * @param update
      */
     void saveChanges(String name, Account update);
-
-    /**
-     * ping
-     * @return ping for wrk test
-     */
-    String ping();
 }

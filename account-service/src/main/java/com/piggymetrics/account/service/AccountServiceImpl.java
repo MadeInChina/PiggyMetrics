@@ -89,9 +89,4 @@ public class AccountServiceImpl implements AccountService {
 
         statisticsClient.updateStatistics(name, account);
     }
-
-    @Override
-    public String ping() {
-        return "pong";
-    }
 }
