@@ -37,7 +37,7 @@ public class AccountController {
         return accountService.create(user);
     }
 
-    @RequestMapping(path = "ping", method = RequestMethod.GET)
+    @RequestMapping(path = "/ping", method = RequestMethod.GET)
     public void ping() {
         accountService.ping();
     }
