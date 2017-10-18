@@ -32,9 +32,9 @@ pipeline {
 
         stage('Image Building And Publishing') {
             steps {
-                    echo 'Image Building And Publishing ...'
-                    dir ('account-service') {
-                    def app = docker.build 'slamhan/piggymetrics-account-service:latest'
+                echo 'Image Building And Publishing ...'
+                dir ('account-service') {
+                docker.build 'slamhan/piggymetrics-account-service:latest'
                 }
             }
         }
