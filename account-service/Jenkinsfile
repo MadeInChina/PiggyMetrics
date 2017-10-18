@@ -34,7 +34,9 @@ pipeline {
             steps {
                 echo 'Image Building And Publishing ...'
                 dir ('account-service') {
-                docker.build 'slamhan/piggymetrics-account-service:latest'
+                    script {
+                      docker.build 'slamhan/piggymetrics-account-service:latest'
+                   }
                 }
             }
         }
