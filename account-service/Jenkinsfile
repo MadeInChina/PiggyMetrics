@@ -33,7 +33,8 @@ node {
         stage ('Upgrade') {
             dir ('account-service') {
             def url = '"$env.ENVIRONMENT_ENDPOINT"  --access-key "$ACCESS_KEY" --secret-key ${SECRET_KEY} -f ../docker-compose-on-rancher-ui.yml -env-file ../secrets -p ${STACK_NAME} up ${SERVICE_NAME} --force-upgrade -p -c -d'
-            sh 'rancher-compose --url "$url"'
+            echo url
+            sh 'rancher-compose --url $url'
             }
         }
     }
