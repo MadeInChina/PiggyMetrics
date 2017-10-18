@@ -8,7 +8,9 @@ pipeline {
         STACK_NAME           = 'Applications'
         SERVICE_NAME         = 'account-service'
     }
-
+    tools {
+            maven 'maven'
+    }
     stages {
         stage('Build') {
             steps {
