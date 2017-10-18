@@ -1,13 +1,13 @@
 node {
-    environment {
-        env.REPO_URL = 'https://github.com/MadeInChina/PiggyMetrics.git'
-        env.CREDENTIALS_ID = 'github-slam'
-        env.ENVIRONMENT_ENDPOINT = 'http://192.168.2.34:8888/v2-beta/projects/1a5'
-        env.ACCESS_KEY           = '602311D6074EC0DFCBB5'
-        env.SECRET_KEY           = 'YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df'
-        env.STACK_NAME           = 'Applications'
-        env.SERVICE_NAME         = 'account-service'
-    }
+
+    env.REPO_URL = 'https://github.com/MadeInChina/PiggyMetrics.git'
+    env.CREDENTIALS_ID = 'github-slam'
+    env.ENVIRONMENT_ENDPOINT = 'http://192.168.2.34:8888/v2-beta/projects/1a5'
+    env.ACCESS_KEY           = '602311D6074EC0DFCBB5'
+    env.SECRET_KEY           = 'YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df'
+    env.STACK_NAME           = 'Applications'
+    env.SERVICE_NAME         = 'account-service'
+
     withMaven(maven:'maven') {
 
         stage('Checkout') {
