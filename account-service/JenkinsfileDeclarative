@@ -8,13 +8,15 @@ pipeline {
         STACK_NAME           = 'Applications'
         SERVICE_NAME         = 'account-service'
     }
+    tools {
+            maven 'maven'
+            jdk 'jdk8'
+    }
     stages {
         stage('Build') {
             steps {
                 dir ('account-service') {
-                  withMaven(maven:'maven') {
-                       sh 'mvn clean install'
-                    }
+                   sh 'mvn clean install'
                 }
             }
         }
