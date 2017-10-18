@@ -1,5 +1,7 @@
 node {
     environment {
+        REPO_URL = 'https://github.com/MadeInChina/PiggyMetrics.git'
+        CREDENTIALS_ID = 'github-slam'
         ENVIRONMENT_ENDPOINT = 'http://192.168.2.34:8888/v2-beta/projects/1a5'
         ACCESS_KEY           = '602311D6074EC0DFCBB5'
         SECRET_KEY           = 'YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df'
@@ -9,7 +11,7 @@ node {
     withMaven(maven:'maven') {
 
         stage('Checkout') {
-            git url: 'https://github.com/MadeInChina/PiggyMetrics.git', credentialsId: 'github-slam', branch: 'master'
+            git url: ${REPO_URL}, credentialsId: ${CREDENTIALS_ID}, branch: 'master'
         }
 
         stage('Build') {
