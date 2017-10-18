@@ -11,7 +11,7 @@ node {
     withMaven(maven:'maven') {
 
         stage('Checkout') {
-            git url: '${REPO_URL}', credentialsId: '${CREDENTIALS_ID}', branch: 'master'
+            git url: '${env.REPO_URL}', credentialsId: '${env.CREDENTIALS_ID}', branch: 'master'
         }
 
         stage('Build') {
@@ -33,7 +33,7 @@ node {
 
         stage ('Upgrade') {
             dir ('account-service') {
-            sh 'rancher-compose --url ${ENVIRONMENT_ENDPOINT}  --access-key ${ACCESS_KEY} --secret-key ${SECRET_KEY} -f ../docker-compose-on-rancher-ui.yml -env-file ../secrets -p {STACK_NAME} up {SERVICE_NAME} --force-upgrade -p -c -d'
+            sh 'rancher-compose --url ${env.ENVIRONMENT_ENDPOINT}  --access-key ${env.ACCESS_KEY} --secret-key ${env.SECRET_KEY} -f ../docker-compose-on-rancher-ui.yml -env-file ../secrets -p {env.STACK_NAME} up {env.SERVICE_NAME} --force-upgrade -p -c -d'
             }
         }
     }
