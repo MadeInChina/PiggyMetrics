@@ -11,13 +11,9 @@ pipeline {
         SERVICE_NAME         = 'account-service'
     }
     stages {
-        stage('Checkout') {
-            steps {
-                git url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID, branch: 'master'
-            }
-        }
         stage('Build') {
             steps {
+                git url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID, branch: 'master'
                 dir ('account-service') {
                   withMaven(maven:'maven') {
                        sh 'mvn clean install'
