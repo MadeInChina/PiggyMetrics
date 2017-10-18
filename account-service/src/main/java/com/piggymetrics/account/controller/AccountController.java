@@ -37,6 +37,7 @@ public class AccountController {
         return accountService.create(user);
     }
 
+    @PreAuthorize("#name.equals('demo')")
     @RequestMapping(path = "/ping", method = RequestMethod.GET)
     public void ping() {
         accountService.ping();
