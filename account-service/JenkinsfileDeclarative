@@ -30,6 +30,7 @@ pipeline {
                 dir ('account-service') {
                     script {
                         def app = docker.build 'slamhan/piggymetrics-account-service:latest'
+                        app.push()
                     }
                 }
             }
