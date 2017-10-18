@@ -19,7 +19,9 @@ pipeline {
         stage('Build') {
             steps {
                 dir ('account-service') {
-                    sh 'mvn clean install'
+                  withMaven(maven:'maven') {
+                       sh 'mvn clean install'
+                    }
                 }
             }
         }
