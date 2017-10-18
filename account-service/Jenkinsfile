@@ -11,7 +11,7 @@ node {
     withMaven(maven:'maven') {
 
         stage('Checkout') {
-            git url: ${REPO_URL}, credentialsId: ${CREDENTIALS_ID}, branch: 'master'
+            git url: '${REPO_URL}', credentialsId: '${CREDENTIALS_ID}', branch: 'master'
         }
 
         stage('Build') {
@@ -26,7 +26,7 @@ node {
 
         stage('Image Build And Push') {
             dir ('account-service') {
-               def app = docker.build "slamhan/piggymetrics-account-service:latest"
+               def app = docker.build 'slamhan/piggymetrics-account-service:latest'
                app.push()
             }
         }
