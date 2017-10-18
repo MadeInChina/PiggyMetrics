@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout') {
             steps {
                     echo 'Checking out ...'
-                    git branch: 'master' url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID
+                    git branch: 'master', url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID
             }
         }
 
