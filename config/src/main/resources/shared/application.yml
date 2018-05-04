@@ -16,7 +16,7 @@ turbine:
 eureka:
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${server.port} #make the application unique on the rancher service layer
+    instance-id: ${spring.cloud.client.ip-address}:${server.port:0} #make the application unique on the rancher service layer
   client:
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
