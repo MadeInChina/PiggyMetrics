@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(url = "${rates.url}", name = "rates-client")
 public interface ExchangeRatesClient {
 
-  @RequestMapping(method = RequestMethod.GET, value = "/2.0.0.RELEASE")
+  @RequestMapping(method = RequestMethod.GET, value = "/latest")
   ExchangeRatesContainer getRates(@RequestParam("base") Currency base);
 }
