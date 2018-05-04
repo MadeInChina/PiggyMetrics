@@ -6,7 +6,7 @@
 
   <groupId>com.piggymetrics</groupId>
   <artifactId>tracing</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>tracing</name>
@@ -62,7 +62,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <finalName>tracing</finalName>
+          <finalName>${project.name}</finalName>
         </configuration>
       </plugin>
       <plugin>
