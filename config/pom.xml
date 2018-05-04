@@ -5,16 +5,13 @@
 
     <groupId>com.piggymetrics</groupId>
     <artifactId>config</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
     <name>config</name>
-    <description></description>
 
     <parent>
         <groupId>com.piggymetrics</groupId>
         <artifactId>piggymetrics</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
+        <!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
     </parent>
 
     <dependencies>
