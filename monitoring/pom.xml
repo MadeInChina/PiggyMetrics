@@ -5,7 +5,6 @@
 
     <groupId>com.piggymetrics</groupId>
     <artifactId>monitoring</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>monitoring</name>
