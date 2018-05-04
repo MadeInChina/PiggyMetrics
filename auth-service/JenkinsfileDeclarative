@@ -23,7 +23,7 @@ pipeline {
             steps {
                 dir ('auth-service') {
                     script {
-                        def app = docker.build 'slamhan/piggymetrics-auth-service:latest'
+                        def app = docker.build 'slamhan/piggymetrics-auth-service:2.0.0.RELEASE'
                         app.push()
                     }
                 }

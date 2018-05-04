@@ -1,7 +1,7 @@
 version: '2'
 services:
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:3-management:2.0.0.RELEASE
     restart: always
     ports:
       - 15672:15672
@@ -13,7 +13,7 @@ services:
   config:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-config
+    image: slamhan/piggymetrics-config:2.0.0.RELEASE
     restart: always
     logging:
       options:
@@ -23,7 +23,7 @@ services:
   registry:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-registry
+    image: slamhan/piggymetrics-registry:2.0.0.RELEASE
     restart: always
     links:
       - config
@@ -37,7 +37,7 @@ services:
   gateway:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-gateway
+    image: slamhan/piggymetrics-gateway:2.0.0.RELEASE
     restart: always
     links:
       - config
@@ -55,7 +55,7 @@ services:
       STATISTICS_SERVICE_PASSWORD: $STATISTICS_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: slamhan/piggymetrics-auth-service
+    image: slamhan/piggymetrics-auth-service:2.0.0.RELEASE
     restart: always
     links:
       - config
@@ -67,7 +67,7 @@ services:
   auth-mongodb:
     environment:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: slamhan/piggymetrics-mongodb
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
     restart: always
     logging:
       options:
@@ -79,7 +79,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: slamhan/piggymetrics-account-service
+    image: slamhan/piggymetrics-account-service:2.0.0.RELEASE
     restart: always
     links:
       - config
@@ -95,7 +95,7 @@ services:
     environment:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: slamhan/piggymetrics-mongodb
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
     restart: always
     logging:
       options:
@@ -107,7 +107,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
       STATISTICS_SERVICE_PASSWORD: $STATISTICS_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-statistics-service
+    image: slamhan/piggymetrics-statistics-service:2.0.0.RELEASE
     restart: always
     links:
       - config
@@ -119,7 +119,7 @@ services:
   statistics-mongodb:
     environment:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: slamhan/piggymetrics-mongodb
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
     restart: always
     logging:
       options:
@@ -131,7 +131,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
       NOTIFICATION_SERVICE_PASSWORD: $NOTIFICATION_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-notification-service
+    image: slamhan/piggymetrics-notification-service:2.0.0.RELEASE
     restart: always
     links:
       - config
@@ -141,7 +141,7 @@ services:
         max-file: "10"
 
   notification-mongodb:
-    image: slamhan/piggymetrics-mongodb
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
     restart: always
     environment:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
@@ -153,7 +153,7 @@ services:
   monitoring:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: slamhan/piggymetrics-monitoring
+    image: slamhan/piggymetrics-monitoring:2.0.0.RELEASE
     restart: always
     links:
       - config
@@ -166,7 +166,7 @@ services:
         max-file: "10"
 
   tracing:
-    image: slamhan/piggymetrics-tracing
+    image: slamhan/piggymetrics-tracing:1.5.7.RELEASE
     restart: always
     links:
       - config

@@ -23,7 +23,7 @@ pipeline {
             steps {
                 dir ('mongodb') {
                     script {
-                        def app = docker.build 'slamhan/piggymetrics-mongodb:latest'
+                        def app = docker.build 'slamhan/piggymetrics-mongodb:2.0.0.RELEASE'
                         app.push()
                     }
                 }

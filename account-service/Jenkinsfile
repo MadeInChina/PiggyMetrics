@@ -26,16 +26,11 @@ node {
 
         stage('Image Build And Push') {
             dir ('account-service') {
-               def app = docker.build 'slamhan/piggymetrics-account-service:latest'
+               def app = docker.build 'slamhan/piggymetrics-account-service:2.0.0.RELEASE'
                app.push()
             }
         }
 
-        stage ('Upgrade') {
-            dir ('account-service') {
-            sh "rancher-compose --url ${env.ENVIRONMENT_ENDPOINT}  --access-key ${env.ACCESS_KEY} --secret-key ${env.SECRET_KEY} -f ../docker-compose-on-rancher-ui.yml -env-file ../secrets -p ${env.STACK_NAME} up ${env.SERVICE_NAME} --force-upgrade -p -c -d"
-            }
-        }
     }
 
 }

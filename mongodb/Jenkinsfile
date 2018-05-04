@@ -7,16 +7,11 @@ node {
 
         stage('Image Build And Publish') {
             dir ('mongodb') {
-                 def app =  docker.build "slamhan/piggymetrics-mongodb:latest"
+                 def app =  docker.build "slamhan/piggymetrics-mongodb:2.0.0.RELEASE"
                  app.push()
             }
         }
 
-        stage ('Upgrade') {
-            dir ('mongodb') {
-            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -env-file ../secrets -p Applications up auth-mongodb account-mongodb statistics-mongodb notification-mongodb --force-upgrade -p -c -d'
-            }
-        }
     }
 
 }

@@ -1,0 +1,94 @@
+version: '2'
+services:
+  registry:
+    image: slamhan/piggymetrics-registry:2.0.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    links:
+    - config:config
+    ports:
+    - 8761:8761/tcp
+  tracing:
+    image: slamhan/piggymetrics-tracing:1.5.7.RELEASE
+    links:
+    - config:config
+    ports:
+    - 11008:11008/tcp
+  auth-mongodb:
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    environment:
+      MONGODB_PASSWORD: password
+  statistics-service:
+    image: slamhan/piggymetrics-statistics-service:2.0.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+      STATISTICS_SERVICE_PASSWORD: password
+    links:
+    - config:config
+  account-mongodb:
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    environment:
+      INIT_DUMP: account-service-dump.js
+      MONGODB_PASSWORD: password
+  monitoring:
+    image: slamhan/piggymetrics-monitoring:2.0.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    links:
+    - config:config
+    - config:config
+    ports:
+    - 9000:8080/tcp
+    - 8989:8989/tcp
+  rabbitmq:
+    image: rabbitmq:3-management:2.0.0.RELEASE
+    ports:
+    - 15672:15672/tcp
+  notification-service:
+    image: slamhan/piggymetrics-notification-service:2.0.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+      NOTIFICATION_SERVICE_PASSWORD: password
+    links:
+    - config:config
+  auth-service:
+    image: slamhan/piggymetrics-auth-service:2.0.0.RELEASE
+    environment:
+      ACCOUNT_SERVICE_PASSWORD: password
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+      NOTIFICATION_SERVICE_PASSWORD: password
+      STATISTICS_SERVICE_PASSWORD: password
+    links:
+    - config:config
+  statistics-mongodb:
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    environment:
+      MONGODB_PASSWORD: password
+  notification-mongodb:
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    environment:
+      MONGODB_PASSWORD: password
+  account-service:
+    image: slamhan/piggymetrics-account-service:2.0.0.RELEASE
+    environment:
+      ACCOUNT_SERVICE_PASSWORD: password
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+    links:
+    - config:config
+    - config:config
+  config:
+    image: slamhan/piggymetrics-config:2.0.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+  gateway:
+    image: slamhan/piggymetrics-gateway:2.0.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    links:
+    - config:config
+    ports:
+    - 4000:4000/tcp

@@ -23,7 +23,7 @@ pipeline {
             steps {
                 dir ('tracing') {
                     script {
-                        def app = docker.build 'slamhan/piggymetrics-tracing:latest'
+                        def app = docker.build 'slamhan/piggymetrics-tracing:1.5.7.RELEASE'
                         app.push()
                     }
                 }

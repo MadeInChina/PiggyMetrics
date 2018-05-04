@@ -17,16 +17,11 @@ node {
 
         stage('Image Build And Publish') {
             dir ('statistics-service') {
-                 def app =  docker.build "slamhan/piggymetrics-statistics-service:latest"
+                 def app =  docker.build "slamhan/piggymetrics-statistics-service:2.0.0.RELEASE"
                  app.push()
             }
         }
 
-        stage ('Upgrade') {
-            dir ('statistics-service') {
-            sh 'rancher-compose --url http://192.168.2.34:8888/v2-beta/projects/1a5  --access-key 602311D6074EC0DFCBB5 --secret-key YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df -f ../docker-compose-on-rancher-ui.yml -env-file ../secrets -p Applications up statistics-service --force-upgrade -p -c -d'
-            }
-        }
     }
 
 }
