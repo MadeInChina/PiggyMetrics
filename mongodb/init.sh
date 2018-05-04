@@ -30,4 +30,4 @@ gosu mongodb mongod "$@"
 
 echo "restarting with auth on"
 sleep 5
-exec gosu mongodb mongod --auth "$@"
+exec gosu mongodb mongod --auth --bind_ip 0.0.0.0 "$@"
