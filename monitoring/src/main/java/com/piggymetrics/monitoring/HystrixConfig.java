@@ -1,4 +1,4 @@
-package com.example.turbine;
+package com.piggymetrics.monitoring;
 
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
