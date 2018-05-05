@@ -1,9 +1,11 @@
 management:
   endpoints:
     web:
-      base-path: /
       exposure:
         include: "*"
+    hystrix:
+      stream:
+        enabled: true
 
 hystrix:
   command:
@@ -16,6 +18,8 @@ hystrix:
     maxConcurrentConnections: 20
     bus:
       enabled: true
+#  metrics:
+#    enabled: true
 
 turbine:
   combine-host-port: true
