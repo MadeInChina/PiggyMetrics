@@ -29,7 +29,9 @@ security:
     
 spring:
   application:
-    index: ${random.uuid} #make the application unique on the rancher container layer,same service but with multi-instances.
+#  Key: spring.application.index
+#  Reason: Application context ids are now unique by default.
+#   index: ${random.uuid} #make the application unique on the rancher container layer,same service but with multi-instances.
   rabbitmq:
     host: rabbitmq
   zipkin:
