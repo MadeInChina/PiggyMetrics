@@ -3,6 +3,8 @@ package com.example.turbine;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.HystrixProperties;
+import org.springframework.cloud.netflix.hystrix.HystrixStreamEndpoint;
 import org.springframework.cloud.netflix.turbine.stream.EnableTurbineStream;
 import org.springframework.cloud.stream.converter.CompositeMessageConverterFactory;
 import org.springframework.context.annotation.Bean;
@@ -22,5 +24,9 @@ public class TurbineApplication {
       CompositeMessageConverterFactory factory) {
     return new ConfigurableCompositeMessageConverter(
         factory.getMessageConverterForAllRegistered().getConverters());
+  }
+  @Bean
+  public HystrixStreamEndpoint hystrixStreamEndpoint(HystrixProperties properties) {
+    return new HystrixStreamEndpoint(properties.getConfig());
   }
 }
