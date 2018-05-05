@@ -7,9 +7,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: *
+        include: "*"
   endpoint:
     hystrix:
+      show-details: always
       stream:
         enabled: true
 management:
