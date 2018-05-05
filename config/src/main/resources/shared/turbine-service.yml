@@ -8,3 +8,7 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    hystrix:
+      stream:
+        enabled: true
