@@ -1,3 +1,10 @@
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: hystrix.stream,refresh,bus-refresh
+
 hystrix:
   command:
     default:
