@@ -13,7 +13,7 @@ import org.springframework.integration.support.converter.ConfigurableCompositeMe
 
 @Log4j2
 @SpringBootApplication
-@EnableTurbineStream
+//@EnableTurbineStream
 @EnableHystrixDashboard
 public class MonitoringApplication {
   // for spring-boot-2.0,x using host:port/actuator/hystrix.stream
