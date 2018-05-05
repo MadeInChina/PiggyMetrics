@@ -1,8 +1,14 @@
 turbine:
   combine-host-port: true
+  instanceUrlSuffix: actuator/hystrix.stream
 
 management:
   endpoints:
     web:
       exposure:
         include: hystrix.stream
+
+logging:
+  level:
+     root: INFO
+     com.netflix.turbine.monitor: DEBUG
