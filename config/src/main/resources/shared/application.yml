@@ -12,8 +12,12 @@ hystrix:
 
 turbine:
   combine-host-port: true
-  instanceUrlSuffix:
-    default: actuator/hystrix.stream
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ["health", "info", "hystrix.stream"]
 
 eureka:
   instance:
