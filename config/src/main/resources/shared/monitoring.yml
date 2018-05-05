@@ -1,10 +1,11 @@
 turbine:
   combine-host-port: true
-  instanceUrlSuffix: actuator/hystrix.stream
+#  instanceUrlSuffix: actuator/hystrix.stream
 
 management:
   endpoints:
     web:
+      base-path: /
       exposure:
         include: hystrix.stream
 
