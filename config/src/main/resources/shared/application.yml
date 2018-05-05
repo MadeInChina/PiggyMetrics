@@ -11,6 +11,7 @@ hystrix:
         enabled: true
 
 turbine:
+  app-config: account-service,auth-service
   clusterNameExpression: new String('default')
   combine-host-port: true
 
