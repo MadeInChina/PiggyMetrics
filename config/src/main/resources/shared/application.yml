@@ -11,9 +11,9 @@ hystrix:
         enabled: true
 
 turbine:
+  clusterNameExpression: new String('default')
   combine-host-port: true
-  instanceUrlSuffix:
-    default: actuator/hystrix.stream
+  instanceUrlSuffix: /actuator/hystrix.stream
 
 management:
   endpoints:
