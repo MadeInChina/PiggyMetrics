@@ -12,6 +12,8 @@ hystrix:
 
 turbine:
   combine-host-port: true
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
 
 management:
   endpoints:
