@@ -1,9 +1,8 @@
 management:
   endpoints:
     web:
-      base-path: /
       exposure:
-        include: hystrix.stream,refresh,bus-refresh
+        include: "*"
 
 hystrix:
   command:
@@ -16,6 +15,9 @@ hystrix:
       maxConcurrentConnections: 20
       bus:
         enabled: true
+
+turbine:
+  combine-host-port: true
 
 eureka:
   instance:
