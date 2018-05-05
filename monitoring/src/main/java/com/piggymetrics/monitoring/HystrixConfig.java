@@ -1,6 +1,5 @@
 package com.piggymetrics.monitoring;
 
-
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -15,10 +14,11 @@ public class HystrixConfig {
   }
 
   @Bean
-  public ServletRegistrationBean<HystrixMetricsStreamServlet> registration(HystrixMetricsStreamServlet servlet) {
-    ServletRegistrationBean<HystrixMetricsStreamServlet> registrationBean = new ServletRegistrationBean<>(servlet,"/actuator/hystrix.stream");
+  public ServletRegistrationBean<HystrixMetricsStreamServlet> registration(
+      HystrixMetricsStreamServlet servlet) {
+    ServletRegistrationBean<HystrixMetricsStreamServlet> registrationBean =
+        new ServletRegistrationBean<>(servlet, "/actuator/hystrix.stream");
     registrationBean.setEnabled(true);
     return registrationBean;
   }
-
 }

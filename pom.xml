@@ -72,6 +72,7 @@
     <module>config</module>
     <module>monitoring</module>
     <module>tracing</module> <!-- https://github.com/spring-cloud/spring-cloud-sleuth/issues/727 -->
+    <module>turbine</module> <!-- https://github.com/spring-cloud/spring-cloud-sleuth/issues/727 -->
     <module>registry</module>
     <module>gateway</module>
     <module>auth-service</module>

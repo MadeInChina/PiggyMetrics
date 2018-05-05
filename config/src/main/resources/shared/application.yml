@@ -2,7 +2,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: hystrix.stream
 
 hystrix:
   command:
@@ -23,6 +23,8 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port:-0} #make the application unique on the rancher service layer
+    metadata-map:
+      turbine-cluster: default
   client:
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
