@@ -41,7 +41,7 @@ public class MonitoringApplication {
   @Bean
   public ServletRegistrationBean servletRegistrationBean() {
     ServletRegistrationBean registration =
-        new ServletRegistrationBean(new HystrixMetricsStreamServlet(), "/hystrix.stream");
+        new ServletRegistrationBean(new HystrixMetricsStreamServlet(), "/actuator/hystrix.stream");
     registration.setName("hystrixServlet");
     registration.setLoadOnStartup(1);
     return registration;
