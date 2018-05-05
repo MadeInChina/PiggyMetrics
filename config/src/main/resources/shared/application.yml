@@ -13,11 +13,6 @@ hystrix:
           thread:
             timeoutInMilliseconds: 10000
   stream:
-    queue:
-      enabled: true
-    #      content-type: text/plain
-    #      content-type: application/json
-      destination: springCloudHystrixStream
     maxConcurrentConnections: 20
     bus:
       enabled: true
