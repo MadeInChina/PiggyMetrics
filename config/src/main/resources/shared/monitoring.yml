@@ -7,7 +7,7 @@ management:
     web:
       base-path: /
       exposure:
-        include: hystrix.stream
+        include: ["health", "info", "hystrix.stream"]
 
 logging:
   level:
