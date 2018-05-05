@@ -2,8 +2,12 @@ server:
   port: 8200
 
 turbine:
-  aggregator:
-    cluster-config: default
-  app-config: account-service
-  cluster-name-expression: metadata['turbine-cluster']
-  instanceUrlSuffix.default: actuator/hystrix.stream
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
+  combine-host-port: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

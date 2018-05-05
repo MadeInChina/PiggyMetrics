@@ -43,6 +43,13 @@ services:
       - piggymetricsnet
     ports:
     - 9000:8080/tcp
+  turbine-service:
+    image: slamhan/piggymetrics-turbine-service
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    networks:
+      - piggymetricsnet
+    ports:
     - 8989:8989/tcp
   rabbitmq:
     image: rabbitmq:3-management
