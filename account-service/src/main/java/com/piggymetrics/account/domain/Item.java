@@ -2,8 +2,10 @@ package com.piggymetrics.account.domain;
 
 import java.math.BigDecimal;
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
+@Data
 public class Item {
 
   @NotNull
@@ -17,44 +19,4 @@ public class Item {
   @NotNull private TimePeriod period;
 
   @NotNull private String icon;
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public BigDecimal getAmount() {
-    return amount;
-  }
-
-  public void setAmount(BigDecimal amount) {
-    this.amount = amount;
-  }
-
-  public Currency getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(Currency currency) {
-    this.currency = currency;
-  }
-
-  public TimePeriod getPeriod() {
-    return period;
-  }
-
-  public void setPeriod(TimePeriod period) {
-    this.period = period;
-  }
-
-  public String getIcon() {
-    return icon;
-  }
-
-  public void setIcon(String icon) {
-    this.icon = icon;
-  }
 }
