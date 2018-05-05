@@ -24,17 +24,6 @@ security:
       user-info-uri: http://auth-service:5000/uaa/users/current
       filter-order : 3
 
-turbine:
-  combine-host-port: true
-#  instanceUrlSuffix: actuator/hystrix.stream
-
-management:
-  endpoints:
-    web:
-      base-path: /
-      exposure:
-        include: ["health", "info", "hystrix.stream"]
-    
 spring:
   application:
 #  Key: spring.application.index
