@@ -6,9 +6,11 @@ hystrix:
           thread:
             timeoutInMilliseconds: 10000
   stream:
-      maxConcurrentConnections: 20
-      bus:
-        enabled: true
+    maxConcurrentConnections: 20
+    bus:
+      enabled: true
+  endpoint:
+    enabled: true
 
 eureka:
   instance:
