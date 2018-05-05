@@ -40,6 +40,6 @@ public class MonitoringApplication {
    */
   @Bean
   public ServletRegistrationBean hystrixServletRegistrationBean() {
-    return new ServletRegistrationBean(new HystrixMetricsStreamServlet(), "/hystrix.stream");
+    return new ServletRegistrationBean(new HystrixMetricsStreamServlet(), "/actuator/hystrix.stream");
   }
 }
