@@ -1,12 +1,10 @@
 package com.piggymetrics.monitoring;
 
-import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.netflix.turbine.stream.EnableTurbineStream;
 import org.springframework.cloud.stream.converter.CompositeMessageConverterFactory;
@@ -31,19 +29,5 @@ public class MonitoringApplication {
       CompositeMessageConverterFactory factory) {
     return new ConfigurableCompositeMessageConverter(
         factory.getMessageConverterForAllRegistered().getConverters());
-  }
-
-  /**
-   * Registers HystrixMetricsStream Servlet that handles Hystrix Metrics
-   *
-   * @return ServletRegistrationBean
-   */
-  @Bean
-  public ServletRegistrationBean servletRegistrationBean() {
-    ServletRegistrationBean registration =
-        new ServletRegistrationBean(new HystrixMetricsStreamServlet(), "/actuator/hystrix.stream");
-    registration.setName("hystrixServlet");
-    registration.setLoadOnStartup(1);
-    return registration;
   }
 }
