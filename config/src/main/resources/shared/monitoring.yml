@@ -1,0 +1,8 @@
+turbine:
+  combine-host-port: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

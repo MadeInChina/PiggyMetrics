@@ -10,15 +10,6 @@ hystrix:
       bus:
         enabled: true
 
-turbine:
-  combine-host-port: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: ["health", "info", "hystrix.stream"]
-
 eureka:
   instance:
     prefer-ip-address: true
