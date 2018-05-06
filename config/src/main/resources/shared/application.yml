@@ -1,5 +1,7 @@
 turbine:
-  clusterNameExpression: "'default'"
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")
 
 hystrix:
   command:
