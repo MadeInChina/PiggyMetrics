@@ -17,7 +17,7 @@ public class HystrixConfig {
   public ServletRegistrationBean<HystrixMetricsStreamServlet> registration(
       HystrixMetricsStreamServlet servlet) {
     ServletRegistrationBean<HystrixMetricsStreamServlet> registrationBean =
-        new ServletRegistrationBean<>(servlet, "/actuator/hystrix.stream");
+        new ServletRegistrationBean<>(servlet);
     registrationBean.setEnabled(true);
     return registrationBean;
   }
