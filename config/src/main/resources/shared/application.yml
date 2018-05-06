@@ -1,3 +1,6 @@
+turbine:
+  clusterNameExpression: "'default'"
+
 hystrix:
   command:
     default:
