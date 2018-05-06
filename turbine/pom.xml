@@ -22,6 +22,12 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-turbine-stream</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>com.netflix.rxnetty</groupId>
+          <artifactId>rx-netty</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
