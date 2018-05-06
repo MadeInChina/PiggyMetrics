@@ -1,10 +1,3 @@
-turbine:
-  instanceUrlSuffix:
-    default: /actuator/hystrix.stream
-  aggregator:
-    clusterConfig: default
-  clusterNameExpression: new String("default")
-
 hystrix:
   command:
     default:

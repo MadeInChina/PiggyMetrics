@@ -1,8 +1,20 @@
+turbine:
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
+  aggregator:
+    cluster-config: default
+  cluster-name-expression: new String('default')
+  combine-host-port: true
+
 management:
   endpoints:
+    jmx:
+      exposure:
+        include: "*"
     web:
       exposure:
         include: "*"
+      base-path: /actuator
   endpoint:
     health:
       show-details: always
