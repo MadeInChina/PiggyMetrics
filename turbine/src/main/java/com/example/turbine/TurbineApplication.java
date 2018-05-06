@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.integration.support.converter.ConfigurableCompositeMessageConverter;
 
 @EnableDiscoveryClient
-@EnableTurbineStream
 @SpringBootApplication
+@EnableTurbineStream
 public class TurbineApplication {
 
   public static void main(String[] args) {

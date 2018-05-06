@@ -18,14 +18,23 @@
   </parent>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-config</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-turbine-stream</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>com.netflix.rxnetty</groupId>
+          <artifactId>rx-netty</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>io.reactivex</groupId>
+      <artifactId>rxnetty</artifactId>
+      <version>0.4.12</version>
+      <scope>runtime</scope>
     </dependency>
 
     <dependency>
@@ -35,6 +44,13 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.reactivex</groupId>
+      <artifactId>rxnetty</artifactId>
+      <version>0.4.12</version>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
 
