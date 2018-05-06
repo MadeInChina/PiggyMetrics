@@ -1,22 +1,11 @@
-turbine:
-#  instanceUrlSuffix:
-#    default: actuator/hystrix.stream
-  combine-host-port: true
-
 management:
   endpoints:
     web:
       exposure:
         include: "*"
   endpoint:
-    hystrix:
+    health:
       show-details: always
-      stream:
-        enabled: true
-management:
-  endpoints:
-    web:
-      base-path: /
-hystrix:
-  metrics:
-    enabled: true
+logging:
+  level:
+    ROOT: info
