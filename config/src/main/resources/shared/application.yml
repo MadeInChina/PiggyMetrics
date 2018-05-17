@@ -34,7 +34,11 @@ spring:
   rabbitmq:
     host: rabbitmq
   zipkin:
-    base-url: http://tracing:11008
+    baseUrl: http://tracing:11008
+    enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
 
 feign:
   hystrix:
