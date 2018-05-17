@@ -34,7 +34,7 @@ spring:
   rabbitmq:
     host: rabbitmq
   zipkin:
-    base-url: http://tracing:9412
+    base-url: http://tracing:9411
   sleuth:
     sampler:
       probability: 1.0
