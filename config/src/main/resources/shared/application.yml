@@ -34,7 +34,7 @@ spring:
   rabbitmq:
     host: rabbitmq
   zipkin:
-    base-url: http://tracing:11008    
+    base-url: http://tracing:11008
 
 feign:
   hystrix:
