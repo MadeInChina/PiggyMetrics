@@ -9,7 +9,6 @@ services:
     - 8300:8080/tcp
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.container.start_once: 'true'
   registry:
     image: slamhan/piggymetrics-registry:2.0.0.RELEASE
     environment:
