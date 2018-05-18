@@ -33,8 +33,9 @@ spring:
 #   index: ${random.uuid} #make the application unique on the rancher container layer,same service but with multi-instances.
   rabbitmq:
     host: rabbitmq
-  zipkin:
-    base-url: http://tracing:9411
+#  it's using spring-cloud-starter-bus-amqp in current project which means using rabbitmq as message bus for zipkin
+#  zipkin:
+#    base-url: http://tracing:9411
   sleuth:
     sampler:
       probability: 1.0
