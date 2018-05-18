@@ -1,6 +1,5 @@
-#FROM java:8-jre
-FROM yiping999/ub-jdk8:1.1
-MAINTAINER yiming zhu <yiming139@163.com>
+FROM openjdk:8-jre-slim
+MAINTAINER renwei.han <slamhan1987@hotmail.com>
 
 
 ADD ./target/account-service.jar /app/
