@@ -17,6 +17,8 @@ services:
     - 8761:8761/tcp
   tracing:
     image: openzipkin/zipkin
+    environment:
+      RABBIT_ADDRESSES: rabbitmq:5672
     stdin_open: true
     tty: true
     ports:
