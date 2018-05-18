@@ -6,7 +6,7 @@ node {
         }
 
         stage('Build') {
-           dir ('gateway') {
+           dir ('infrastructure-services/gateway') {
                 sh 'mvn clean install'
 
                 def pom = readMavenPom file:'pom.xml'
@@ -16,7 +16,7 @@ node {
         }
 
         stage('Image Build And Publish') {
-            dir ('gateway') {
+            dir ('infrastructure-services/gateway') {
                  def app =  docker.build "slamhan/piggymetrics-gateway:2.0.0.RELEASE"
                  app.push()
             }

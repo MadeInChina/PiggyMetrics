@@ -6,7 +6,7 @@ node {
         }
 
         stage('Build') {
-           dir ('statistics-service') {
+           dir ('core-services/statistics-service') {
                 sh 'mvn clean install'
 
                 def pom = readMavenPom file:'pom.xml'
@@ -16,7 +16,7 @@ node {
         }
 
         stage('Image Build And Publish') {
-            dir ('statistics-service') {
+            dir ('core-services/statistics-service') {
                  def app =  docker.build "slamhan/piggymetrics-statistics-service:2.0.0.RELEASE"
                  app.push()
             }

@@ -6,7 +6,7 @@ node {
         }
 
         stage('Build') {
-           dir ('auth-service') {
+           dir ('core-services/auth-service') {
                 sh 'mvn clean install'
 
                 def pom = readMavenPom file:'pom.xml'
@@ -16,7 +16,7 @@ node {
         }
 
         stage('Image') {
-            dir ('auth-service') {
+            dir ('core-services/auth-service') {
                  def app =  docker.build "slamhan/piggymetrics-auth-service:2.0.0.RELEASE"
                  app.push()
             }

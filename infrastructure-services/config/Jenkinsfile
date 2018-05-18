@@ -6,7 +6,7 @@ node {
         }
 
         stage('Build') {
-           dir ('config') {
+           dir ('infrastructure-services/config') {
                 sh 'mvn clean install'
 
                 def pom = readMavenPom file:'pom.xml'
@@ -16,7 +16,7 @@ node {
         }
 
         stage('Image Build And Push') {
-            dir ('config') {
+            dir ('infrastructure-services/config') {
                 def app = docker.build "slamhan/piggymetrics-config:2.0.0.RELEASE"
                 app.push()
             }

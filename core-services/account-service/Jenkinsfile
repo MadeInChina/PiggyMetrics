@@ -15,7 +15,7 @@ node {
         }
 
         stage('Build') {
-            dir ('account-service') {
+            dir ('core-services/account-service') {
                 sh 'mvn clean install'
 
                 def pom = readMavenPom file:'pom.xml'
@@ -25,7 +25,7 @@ node {
         }
 
         stage('Image Build And Push') {
-            dir ('account-service') {
+            dir ('core-services/account-service') {
                def app = docker.build 'slamhan/piggymetrics-account-service:2.0.0.RELEASE'
                app.push()
             }

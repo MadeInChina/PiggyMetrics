@@ -6,7 +6,7 @@ node {
         }
 
         stage('Build') {
-           dir ('notification-service') {
+           dir ('core-services/notification-service') {
                 sh 'mvn clean install'
 
                 def pom = readMavenPom file:'pom.xml'
@@ -16,7 +16,7 @@ node {
         }
 
         stage('Image Build And Publish') {
-            dir ('notification-service') {
+            dir ('core-services/notification-service') {
                  def app =  docker.build "slamhan/piggymetrics-notification-service:2.0.0.RELEASE"
                  app.push()
             }

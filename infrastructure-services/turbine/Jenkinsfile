@@ -6,7 +6,7 @@ node {
         }
 
         stage('Build') {
-           dir ('turbine') {
+           dir ('infrastructure-services/turbine') {
                 sh 'mvn clean install'
 
                 def pom = readMavenPom file:'pom.xml'
@@ -16,7 +16,7 @@ node {
         }
 
         stage('Image Build And Publish') {
-            dir ('turbine') {
+            dir ('infrastructure-services/turbine') {
                  def app =  docker.build "slamhan/piggymetrics-turbine:2.0.0.RELEASE"
                  app.push()
             }
