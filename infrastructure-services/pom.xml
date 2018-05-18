@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.piggymetrics</groupId>
+    <artifactId>piggymetrics</artifactId>
+    <version>1.0</version>
+    <!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+  </parent>
+
+  <artifactId>infrastructure-services</artifactId>
+  <packaging>pom</packaging>
+  <name>infrastructure-services</name>
+
+  <modules>
+    <module>config</module>
+    <module>monitoring</module>
+    <module>turbine</module> <!-- https://github.com/spring-cloud/spring-cloud-sleuth/issues/727 -->
+    <module>registry</module>
+    <module>gateway</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-config</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>
