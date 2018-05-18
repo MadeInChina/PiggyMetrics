@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    environment {
+        ENVIRONMENT_ENDPOINT = 'http://192.168.2.34:8888/v2-beta/projects/1a5'
+        ACCESS_KEY           = '602311D6074EC0DFCBB5'
+        SECRET_KEY           = 'YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df'
+        STACK_NAME           = 'Applications'
+        SERVICE_NAME         = 'auth-service'
+    }
+    tools {
+            maven 'maven'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                dir ('auth-service') {
+                   sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Image Build And Push') {
+            steps {
+                dir ('auth-service') {
+                    script {
+                        def app = docker.build 'slamhan/piggymetrics-auth-service:2.0.0.RELEASE'
+                        app.push()
+                    }
+                }
+            }
+        }
+        stage('Upgrade') {
+            steps {
+               sh "rancher-compose --url ${env.ENVIRONMENT_ENDPOINT}  --access-key ${env.ACCESS_KEY} --secret-key ${env.SECRET_KEY} -f docker-compose-on-rancher-ui.yml -env-file secrets -p ${env.STACK_NAME} up ${env.SERVICE_NAME} --force-upgrade -p -c -d"
+            }
+        }
+
+    }
+}

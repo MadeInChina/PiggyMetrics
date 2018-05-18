@@ -1,0 +1,51 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+  stream:
+    maxConcurrentConnections: 20
+    bus:
+      enabled: true
+  endpoint:
+    enabled: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port:-0} #make the application unique on the rancher service layer
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka/
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://auth-service:5000/uaa/users/current
+      filter-order : 3
+
+spring:
+  application:
+#  Key: spring.application.index
+#  Reason: Application context ids are now unique by default.
+#   index: ${random.uuid} #make the application unique on the rancher container layer,same service but with multi-instances.
+  rabbitmq:
+    host: rabbitmq
+#  it's using spring-cloud-starter-bus-amqp in current project which means using rabbitmq as message bus for zipkin
+#  zipkin:
+#    base-url: http://tracing:9411
+  sleuth:
+    sampler:
+      probability: 1.0
+
+feign:
+  hystrix:
+    enabled: true
+
+logging:
+  level:
+     root: INFO
+     org.springframework.cloud.netflix.turbine: DEBUG
+     org.springframework.cloud.netflix.hystrix: DEBUG    

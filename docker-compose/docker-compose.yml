@@ -1,7 +1,7 @@
 version: '2'
 services:
-  turbine-service:
-    image: slamhan/piggymetrics-turbine-service:2.0.0.RELEASE
+  turbine:
+    image: slamhan/piggymetrics-turbine:2.0.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
