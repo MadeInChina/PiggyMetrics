@@ -5,10 +5,8 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
-      - 8989:8989/tcp
-      - 8300:8080/tcp
-    networks:
-      - piggynet
+    - 8989:8989/tcp
+    - 8300:8080/tcp
     labels:
       io.rancher.container.pull_image: always
   registry:
@@ -16,9 +14,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
-      - 8761:8761/tcp
-    networks:
-      - piggynet
+    - 8761:8761/tcp
   tracing:
     image: openzipkin/zipkin
     environment:
@@ -26,47 +22,30 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - 9411:9411/tcp
-    networks:
-      - piggynet
-    depends_on:
-      - rabbitmq
+    - 9411:9411/tcp
     labels:
       io.rancher.container.pull_image: always
   auth-mongodb:
     image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
-    networks:
-      - piggynet
   statistics-service:
     image: slamhan/piggymetrics-statistics-service:2.0.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
       STATISTICS_SERVICE_PASSWORD: password
-    networks:
-      - piggynet
-    depends_on:
-      - statistics-mongodb
-      - auth-service
-      - registry
-      - config
   account-mongodb:
     image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
     environment:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: password
-    networks:
-      - piggynet
   monitoring:
     image: slamhan/piggymetrics-monitoring:2.0.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
     - 9000:8080/tcp
-    networks:
-    - piggynet
     labels:
       io.rancher.container.pull_image: always
   rabbitmq:
@@ -74,21 +53,12 @@ services:
     ports:
     - 15672:15672/tcp
     - 5672:5672/tcp
-    networks:
-    - piggynet
   notification-service:
     image: slamhan/piggymetrics-notification-service:2.0.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
       NOTIFICATION_SERVICE_PASSWORD: password
-    networks:
-    - piggynet
-    depends_on:
-      - notification-mongodb
-      - auth-service
-      - registry
-      - config
   auth-service:
     image: slamhan/piggymetrics-auth-service:2.0.0.RELEASE
     environment:
@@ -97,49 +67,28 @@ services:
       MONGODB_PASSWORD: password
       NOTIFICATION_SERVICE_PASSWORD: password
       STATISTICS_SERVICE_PASSWORD: password
-    networks:
-    - piggynet
-    depends_on:
-      - auth-mongodb
-      - registry
-      - config
     labels:
       io.rancher.container.pull_image: always
   statistics-mongodb:
     image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
-    networks:
-    - piggynet
   notification-mongodb:
     image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
-    networks:
-    - piggynet
   account-service:
     image: slamhan/piggymetrics-account-service:2.0.0.RELEASE
     environment:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
-    networks:
-    - piggynet
-    depends_on:
-      - account-mongodb
-      - auth-service
-      - registry
-      - config
     labels:
       io.rancher.container.pull_image: always
   config:
     image: slamhan/piggymetrics-config:2.0.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
-    networks:
-      - piggynet
-    depends_on:
-      - registry
     labels:
       io.rancher.container.pull_image: always
   gateway:
@@ -148,14 +97,3 @@ services:
       CONFIG_SERVICE_PASSWORD: password
     ports:
     - 4000:4000/tcp
-    networks:
-    - piggynet
-    depends_on:
-      - registry
-      - config
-      - account-service
-      - auth-service
-      - notification-service
-      - statistics-service
-networks:
-  piggynet:
