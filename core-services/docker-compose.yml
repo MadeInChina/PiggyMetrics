@@ -1,0 +1,46 @@
+version: '3'
+services:
+  statistics-service:
+    image: slamhan/piggymetrics-statistics-service:2.0.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+      STATISTICS_SERVICE_PASSWORD: password
+    networks:
+      - default
+  notification-service:
+    image: slamhan/piggymetrics-notification-service:2.0.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+      NOTIFICATION_SERVICE_PASSWORD: password
+    networks:
+      - default
+  auth-service:
+    image: slamhan/piggymetrics-auth-service:2.0.0.RELEASE
+    environment:
+      ACCOUNT_SERVICE_PASSWORD: password
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+      NOTIFICATION_SERVICE_PASSWORD: password
+      STATISTICS_SERVICE_PASSWORD: password
+    networks:
+      - default
+  statistics-mongodb:
+    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    environment:
+      MONGODB_PASSWORD: password
+    networks:
+      - default
+  account-service:
+    image: slamhan/piggymetrics-account-service:2.0.0.RELEASE
+    environment:
+      ACCOUNT_SERVICE_PASSWORD: password
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+    networks:
+      - default
+networks:
+ default:
+    external:
+      name: piggynet
