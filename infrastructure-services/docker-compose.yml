@@ -1,4 +1,4 @@
-version: '3'
+version: '2.1'
 services:
   turbine:
     image: slamhan/piggymetrics-turbine:2.0.0.RELEASE
