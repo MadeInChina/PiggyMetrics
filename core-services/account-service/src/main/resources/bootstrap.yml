@@ -7,3 +7,8 @@ spring:
       fail-fast: true
       password: ${CONFIG_SERVICE_PASSWORD}
       username: user
+logging:
+  level:
+    org.springframework.cloud.sleuth: DEBUG
+    org.springframework.cloud.netflix.turbine: DEBUG
+    org.springframework.cloud.netflix.hystrix: DEBUG

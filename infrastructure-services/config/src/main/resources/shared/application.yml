@@ -39,14 +39,18 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+#  http://cloud.spring.io/spring-cloud-static/spring-cloud-sleuth/2.0.0.RC1/single/spring-cloud-sleuth.html
+#  If you use spring-cloud-sleuth-stream and spring-cloud-netflix-hystrix-stream together, a span is created for each Hystrix metrics and sent to Zipkin. This behavior may be annoying. You can prevent it by setting spring.sleuth.scheduled.skipPattern=org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
+    integration:
+      enabled: false
     scheduled:
-      skipPattern: org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
+      skip-pattern: "^org.*HystrixStreamTask$"
 feign:
   hystrix:
     enabled: true
 
 logging:
   level:
-     root: INFO
-     org.springframework.cloud.netflix.turbine: DEBUG
-     org.springframework.cloud.netflix.hystrix: DEBUG    
+    org.springframework.cloud.sleuth: DEBUG
+    org.springframework.cloud.netflix.turbine: DEBUG
+    org.springframework.cloud.netflix.hystrix: DEBUG
