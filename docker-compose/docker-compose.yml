@@ -155,6 +155,9 @@ services:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
+#      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y
+    ports:
+      - 8000:8000
     networks:
       - piggynet
     depends_on:
