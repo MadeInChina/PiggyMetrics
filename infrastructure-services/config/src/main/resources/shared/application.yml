@@ -39,13 +39,24 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+#For snapshots version,it's by default
+
+# You can provide the `spring.sleuth.integration.patterns` pattern to explicitly provide the names of channels that you want to include for tracing.
+ #-By default, all channels are included.	+By default, all channels but `hystrixStreamOutput` channel are included.
+#Marcin Grzejszczak @marcingrzejszczak 00:59
+#hey @MadeInChina . I’ve fixed spring-cloud/spring-cloud-sleuth#986 . Remove the integration and there’s nothing you should set to make things work. Can you please double check your code against latest snapshots?
 # turns off tracing messaging. https://github.com/spring-cloud/spring-cloud-sleuth/issues/49
-    integration:
-      enabled: false
+#    integration:
+#      enabled: false
+
+#If you use `spring-cloud-sleuth-stream` and `spring-cloud-netflix-hystrix-stream` together, a span is created for each Hystrix metrics and sent to Zipkin.
+#-TIP: If you use `spring-cloud-sleuth-stream` and `spring-cloud-netflix-hystrix-stream` together, a span is created for each Hystrix metrics and sent to Zipkin.
+
+#+This behavior may be annoying. That's why, by default, `spring.sleuth.scheduled.skipPattern=org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask`.
 #  http://cloud.spring.io/spring-cloud-static/spring-cloud-sleuth/2.0.0.RC1/single/spring-cloud-sleuth.html
 #  If you use spring-cloud-sleuth-stream and spring-cloud-netflix-hystrix-stream together, a span is created for each Hystrix metrics and sent to Zipkin. This behavior may be annoying. You can prevent it by setting spring.sleuth.scheduled.skipPattern=org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
-    scheduled:
-      skip-pattern: org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
+#    scheduled:
+#      skip-pattern: org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
 
 feign:
   hystrix:
