@@ -22,19 +22,11 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-turbine-stream</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>com.netflix.rxnetty</groupId>
-          <artifactId>rx-netty</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>
-      <groupId>io.reactivex</groupId>
-      <artifactId>rxnetty</artifactId>
-      <version>0.4.20</version>
-      <scope>runtime</scope>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
     </dependency>
 
     <dependency>

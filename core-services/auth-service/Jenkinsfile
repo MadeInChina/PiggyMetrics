@@ -17,7 +17,7 @@ node {
 
         stage('Image') {
             dir ('core-services/auth-service') {
-                 def app =  docker.build "slamhan/piggymetrics-auth-service:2.0.0.RELEASE"
+                 def app =  docker.build "slamhan/piggymetrics-auth-service:2.0.2.RELEASE"
                  app.push()
             }
         }

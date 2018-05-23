@@ -7,7 +7,7 @@ node {
 
         stage('Image Build And Publish') {
             dir ('infrastructure-services/mongodb') {
-                 def app =  docker.build "slamhan/piggymetrics-mongodb:2.0.0.RELEASE"
+                 def app =  docker.build "slamhan/piggymetrics-mongodb:2.0.2.RELEASE"
                  app.push()
             }
         }

@@ -17,7 +17,7 @@ node {
 
         stage('Image Build And Publish') {
             dir ('infrastructure-services/turbine') {
-                 def app =  docker.build "slamhan/piggymetrics-turbine:2.0.0.RELEASE"
+                 def app =  docker.build "slamhan/piggymetrics-turbine:2.0.2.RELEASE"
                  app.push()
             }
         }

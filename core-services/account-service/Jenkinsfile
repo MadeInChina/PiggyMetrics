@@ -26,7 +26,7 @@ node {
 
         stage('Image Build And Push') {
             dir ('core-services/account-service') {
-               def app = docker.build 'slamhan/piggymetrics-account-service:2.0.0.RELEASE'
+               def app = docker.build 'slamhan/piggymetrics-account-service:2.0.2.RELEASE'
                app.push()
             }
         }
