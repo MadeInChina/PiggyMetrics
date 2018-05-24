@@ -244,7 +244,7 @@ If you'd like to build images yourself (with some changes in the code, for examp
 - http://localhost:80 - Gateway
 - http://localhost:8761 - Eureka Dashboard
 - http://localhost:9000/hystrix - Hystrix Dashboard (paste Turbine stream link on the form)
-- http://localhost:8989 - Turbine stream (source for the Hystrix Dashboard)
+- http://localhost:8080 - Turbine stream (source for the Hystrix Dashboard)
 - http://localhost:15672 - RabbitMq management (default login/password: guest/guest)
 
 #### Notes
