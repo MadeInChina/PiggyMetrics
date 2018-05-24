@@ -23,6 +23,8 @@ hystrix:
 
 eureka:
   instance:
+    metadata-map:
+      management.context-path: ${server.servlet.context-path:}/actuator
     leaseRenewalIntervalInSeconds: 10
     status-page-url-path: ${server.servlet.context-path:}/actuator/info
     health-check-url-path: ${server.servlet.context-path:}/actuator/health
@@ -70,7 +72,11 @@ spring:
 #  If you use spring-cloud-sleuth-stream and spring-cloud-netflix-hystrix-stream together, a span is created for each Hystrix metrics and sent to Zipkin. This behavior may be annoying. You can prevent it by setting spring.sleuth.scheduled.skipPattern=org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
 #    scheduled:
 #      skip-pattern: org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
-
+  boot:
+    admin:
+      discovery:
+        converter:
+          management-context-path: ${server.servlet.context-path:}/actuator
 feign:
   hystrix:
     enabled: true
