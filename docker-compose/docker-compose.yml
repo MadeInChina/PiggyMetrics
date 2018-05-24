@@ -1,6 +1,17 @@
 version: '2.1'
 services:
 ##################Infrastructure Services#####################
+  admin:
+    image: slamhan/piggymetrics-admin:2.0.2.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    ports:
+      - 8200:8080/tcp
+    networks:
+      - piggynet
+    depends_on:
+      config:
+        condition: service_healthy
   turbine:
     image: slamhan/piggymetrics-turbine:2.0.2.RELEASE
     environment:

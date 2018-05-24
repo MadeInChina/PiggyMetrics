@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -5,29 +6,30 @@
 
   <parent>
     <groupId>com.piggymetrics</groupId>
-    <artifactId>piggymetrics</artifactId>
+    <artifactId>infrastructure-services</artifactId>
     <version>1.0</version>
     <!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
   </parent>
 
-  <artifactId>infrastructure-services</artifactId>
-  <packaging>pom</packaging>
-  <name>infrastructure-services</name>
+  <groupId>com.piggymetrics</groupId>
+  <artifactId>admin</artifactId>
+  <packaging>jar</packaging>
 
-  <modules>
-    <module>admin</module>
-    <module>config</module>
-    <module>monitoring</module>
-    <module>turbine</module> <!-- https://github.com/spring-cloud/spring-cloud-sleuth/issues/727 -->
-    <module>registry</module>
-    <module>gateway</module>
-  </modules>
+  <name>admin</name>
 
   <dependencies>
+
+    <dependency>
+      <groupId>de.codecentric</groupId>
+      <artifactId>spring-boot-admin-starter-server</artifactId>
+      <version>2.0.0-SNAPSHOT</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-config</artifactId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
   </dependencies>
+
 
 </project>

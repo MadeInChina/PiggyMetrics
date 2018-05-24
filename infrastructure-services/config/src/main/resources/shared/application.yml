@@ -1,3 +1,12 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
 hystrix:
   command:
     default:
@@ -14,9 +23,13 @@ hystrix:
 
 eureka:
   instance:
+    leaseRenewalIntervalInSeconds: 10
+    status-page-url-path: ${server.servlet.context-path:}/actuator/info
+    health-check-url-path: ${server.servlet.context-path:}/actuator/health
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port:-0} #make the application unique on the rancher service layer
   client:
+    registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
 
