@@ -2,7 +2,6 @@ package com.piggymetrics.auth;
 
 import com.piggymetrics.auth.service.security.MongoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -16,9 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -46,16 +43,18 @@ public class AuthApplication {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      // @formatter:off
       http.authorizeRequests().anyRequest().authenticated().and().csrf().disable();
-      // @formatter:on
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
       auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
-
+    // for @Autowired private AuthenticationManager authenticationManager;
+    // Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying
+    // bean of type 'org.springframework.security.authentication.AuthenticationManager' available:
+    // expected at least 1 bean which qualifies as autowire candidate. Dependency annotations:
+    // {@org.springframework.beans.factory.annotation.Autowired(required=true)}
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -69,9 +68,7 @@ public class AuthApplication {
 
     private TokenStore tokenStore = new InMemoryTokenStore();
 
-    @Autowired
-    @Qualifier("authenticationManagerBean")
-    private AuthenticationManager authenticationManager;
+    @Autowired private AuthenticationManager authenticationManager;
 
     @Autowired private MongoUserDetailsService userDetailsService;
 
@@ -79,10 +76,7 @@ public class AuthApplication {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
       // TODO persist clients details
-
-      // @formatter:off
       clients
           .inMemory()
           .withClient("browser")
@@ -103,7 +97,6 @@ public class AuthApplication {
           .secret(env.getProperty("NOTIFICATION_SERVICE_PASSWORD"))
           .authorizedGrantTypes("client_credentials", "refresh_token")
           .scopes("server");
-      // @formatter:on
     }
 
     @Override
@@ -120,7 +113,8 @@ public class AuthApplication {
     }
   }
 
-  // Troubleshooting https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#getting-started-experience
+  // Troubleshooting
+  // https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#getting-started-experience
   // java.lang.IllegalArgumentException: There is no PasswordEncoder mapped for the id "null"
   @SuppressWarnings("deprecation")
   @Bean
