@@ -165,11 +165,15 @@ services:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
-#      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y
-    ports:
-      - 8000:8000
+#     JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y
+#    ports:
+#      - 8000:8000
     networks:
       - piggynet
+#    healthcheck:
+#      test: curl -f http://localhost:6000/accounts/actuator/health || exit 1
+#      interval: 10s
+#      timeout: 60s
     depends_on:
       config:
         condition: service_healthy
