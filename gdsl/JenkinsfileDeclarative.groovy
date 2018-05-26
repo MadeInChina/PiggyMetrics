@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID, branch: 'master'
+                git url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID, branch: 'Finchley.BUILD-SNAPSHOT'
             }
         }
         stage('Build') {
