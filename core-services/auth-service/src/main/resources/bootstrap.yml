@@ -7,6 +7,3 @@ spring:
       fail-fast: true
       password: ${CONFIG_SERVICE_PASSWORD}
       username: user
-server:
-  tomcat:
-    max-threads: 400
