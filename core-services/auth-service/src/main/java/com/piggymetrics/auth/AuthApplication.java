@@ -36,7 +36,15 @@ public class AuthApplication {
   }
 
   @Configuration
+  /**
+   * @EnableWebSecurity The configuration creates a Servlet Filter known as the springSecurityFilterChain which is responsible for all the security
+   * WebSecurityConfig only contains information about how to authenticate our users.
+   */
   @EnableWebSecurity
+  /**
+   * WebSecurityConfigurerAdapter
+   * How does Spring Security know that we want to require all users to be authenticated? How does Spring Security know we want to support form based authentication
+   */
   protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired private MongoUserDetailsService userDetailsService;
