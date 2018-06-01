@@ -1,4 +1,4 @@
-FROM slamhan/gatling:2.3.1
+FROM slamhan/gatling:latest
 
 MAINTAINER renwei.han <slamhan1987@hotmail.com>
 
