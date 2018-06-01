@@ -4,8 +4,8 @@ services:
   gatling:
     image: slamhan/piggymetrics-gatling:2.0.2.RELEASE
     command: [com.piggymetrics.gatling.AccountServiceSimulation]
-#    volumes:
-#      - /gatling/results:/gatling/results
+    volumes:
+      - gatling:/gatling/results
     networks:
       - piggynet
 ##################Infrastructure Services#####################
@@ -191,3 +191,6 @@ services:
         condition: service_started
 networks:
   piggynet:
+
+volumes:
+  gatling:
