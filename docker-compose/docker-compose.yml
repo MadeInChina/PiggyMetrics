@@ -3,6 +3,9 @@ services:
 ##################Testing#####################################
   gatling:
     image: slamhan/piggymetrics-gatling:2.0.2.RELEASE
+    environment:
+      BASE_URL: http://gateway:4000
+      CONCURRENCY: 10
     command: [com.piggymetrics.gatling.AccountServiceSimulation]
     volumes:
       - gatling:/gatling/results
