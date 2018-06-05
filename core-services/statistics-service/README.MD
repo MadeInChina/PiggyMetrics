@@ -11,6 +11,4 @@
 9: "#                                                                                                                               #",
 a: "#################################################################################################################################",
 }
-
-##
-Please provide string parameter FIXER_ACCESS_KEY For using Jenkinsfile to build statistics-service.
+using local api to replace with that.

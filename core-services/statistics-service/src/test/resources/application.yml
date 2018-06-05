@@ -13,4 +13,4 @@ spring:
       port: 0
 
 rates:
-  url: http://data.fixer.io/api/latest?access_key=${FIXER_ACCESS_KEY}
+  url: http://localhost:1080/api
