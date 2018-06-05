@@ -22,4 +22,4 @@ server:
   port: 7000
 
 rates:
-  url: http://api.fixer.io
+  url: http://data.fixer.io/api/latest?access_key=${FIXER_ACCESS_KEY}
