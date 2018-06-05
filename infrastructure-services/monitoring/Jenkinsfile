@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Image Build And Push') {
             steps {
-                ddir ('infrastructure-services/monitoring') {
+                dir ('infrastructure-services/monitoring') {
                     script {
                         def app = docker.build 'slamhan/piggymetrics-monitoring:2.0.2.RELEASE'
                         app.push()
