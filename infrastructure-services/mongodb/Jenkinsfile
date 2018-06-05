@@ -5,13 +5,6 @@ pipeline {
             maven 'maven'
     }
     stages {
-        stage('Build') {
-            steps {
-                dir ('infrastructure-services/mongodb') {
-                   sh 'mvn clean install'
-                }
-            }
-        }
         stage('Image Build And Push') {
             steps {
                 dir ('infrastructure-services/mongodb') {
