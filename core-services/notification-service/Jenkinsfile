@@ -1,27 +1,26 @@
-node {
-    withMaven(maven:'maven') {
+pipeline {
+    agent any
 
-        stage('Checkout') {
-            git url: 'https://github.com/MadeInChina/PiggyMetrics.git', credentialsId: 'github-slam', branch: 'Finchley.BUILD-SNAPSHOT'
-        }
-
-        stage('Build') {
-           dir ('core-services/notification-service') {
-                sh 'mvn clean install'
-
-                def pom = readMavenPom file:'pom.xml'
-                print pom.version
-                env.version = pom.version
-            }
-        }
-
-        stage('Image Build And Publish') {
-            dir ('core-services/notification-service') {
-                 def app =  docker.build "slamhan/piggymetrics-notification-service:2.0.2.RELEASE"
-                 app.push()
-            }
-        }
-
+    tools {
+            maven 'maven'
     }
-
+    stages {
+        stage('Build') {
+            steps {
+                dir ('core-services/notification-service') {
+                   sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Image Build And Push') {
+            steps {
+                dir ('core-services/notification-service') {
+                    script {
+                        def app = docker.build 'slamhan/piggymetrics-notification-service:2.0.2.RELEASE'
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
 }

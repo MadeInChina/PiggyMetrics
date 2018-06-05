@@ -1,36 +1,26 @@
-node {
+pipeline {
+    agent any
 
-    env.REPO_URL = 'https://github.com/MadeInChina/PiggyMetrics.git'
-    env.CREDENTIALS_ID = 'github-slam'
-    env.ENVIRONMENT_ENDPOINT = 'http://192.168.2.34:8888/v2-beta/projects/1a5'
-    env.ACCESS_KEY           = '602311D6074EC0DFCBB5'
-    env.SECRET_KEY           = 'YttmUwex7ryzBLnM1CctyumSqac16AboL43Va8df'
-    env.STACK_NAME           = 'Applications'
-    env.SERVICE_NAME         = 'account-service'
-
-    withMaven(maven:'maven') {
-
-        stage('Checkout') {
-            git url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID, branch: 'Finchley.BUILD-SNAPSHOT'
-        }
-
-        stage('Build') {
-            dir ('core-services/account-service') {
-                sh 'mvn clean install'
-
-                def pom = readMavenPom file:'pom.xml'
-                print pom.version
-                env.version = pom.version
-            }
-        }
-
-        stage('Image Build And Push') {
-            dir ('core-services/account-service') {
-               def app = docker.build 'slamhan/piggymetrics-account-service:2.0.2.RELEASE'
-               app.push()
-            }
-        }
-
+    tools {
+            maven 'maven'
     }
-
+    stages {
+        stage('Build') {
+            steps {
+                dir ('core-services/account-service') {
+                   sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Image Build And Push') {
+            steps {
+                dir ('core-services/account-service') {
+                    script {
+                        def app = docker.build 'slamhan/piggymetrics-account-service:2.0.2.RELEASE'
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
 }
