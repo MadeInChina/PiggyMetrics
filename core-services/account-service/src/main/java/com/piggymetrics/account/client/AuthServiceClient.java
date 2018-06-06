@@ -1,6 +1,5 @@
 package com.piggymetrics.account.client;
 
-import com.piggymetrics.account.OAuth2ClientJwtConfig.FeignConfig;
 import com.piggymetrics.account.domain.User;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.log4j.Log4j2;
@@ -10,11 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(
-  name = "auth-service",
-  fallbackFactory = AuthServiceClientFallbackFactory.class,
-  configuration = FeignConfig.class
-)
+@FeignClient(name = "auth-service", fallbackFactory = AuthServiceClientFallbackFactory.class)
 public interface AuthServiceClient {
 
   @RequestMapping(

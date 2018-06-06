@@ -40,16 +40,19 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         .withClient("account-service")
         .secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
         .authorizedGrantTypes("client_credentials", "refresh_token")
+        .authorities("ROLE_TRUSTED_CLIENT")
         .scopes("server")
         .and()
         .withClient("statistics-service")
         .secret(env.getProperty("STATISTICS_SERVICE_PASSWORD"))
         .authorizedGrantTypes("client_credentials", "refresh_token")
+        .authorities("ROLE_TRUSTED_CLIENT")
         .scopes("server")
         .and()
         .withClient("notification-service")
         .secret(env.getProperty("NOTIFICATION_SERVICE_PASSWORD"))
         .authorizedGrantTypes("client_credentials", "refresh_token")
+        .authorities("ROLE_TRUSTED_CLIENT")
         .scopes("server");
   }
 
@@ -63,7 +66,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
   @Override
   public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-    oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+    oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
   }
 
   @Bean
