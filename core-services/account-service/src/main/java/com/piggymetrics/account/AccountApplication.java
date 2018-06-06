@@ -12,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
@@ -54,6 +55,7 @@ public class AccountApplication extends ResourceServerConfigurerAdapter {
     return new OAuth2RestTemplate(clientCredentialsResourceDetails());
   }
 
+  @Primary
   @Bean
   public ResourceServerTokenServices tokenServices() {
     return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
