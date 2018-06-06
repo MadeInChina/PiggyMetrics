@@ -6,11 +6,16 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceS
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 
 /** Define Spring is going to manage the creation, signing and translation of a JWT token. */
+@EnableResourceServer
 @Configuration
-public class OAuth2ClientJwtConfig {
+public class OAuth2ClientJwtConfig extends ResourceServerConfigurerAdapter {
 
   @Autowired OAuth2ClientProperties oAuth2ClientProperties;
 
@@ -25,5 +30,19 @@ public class OAuth2ClientJwtConfig {
     tokenService.setClientId(oAuth2ClientProperties.getClientId());
     tokenService.setClientSecret(oAuth2ClientProperties.getClientSecret());
     return tokenService;
+  }
+
+  @Override
+  public void configure(ResourceServerSecurityConfigurer resources) {
+    resources.tokenServices(tokenServices());
+  }
+
+  @Override
+  public void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()
+        .antMatchers("/", "/demo", "/actuator/**")
+        .permitAll()
+        .anyRequest()
+        .authenticated();
   }
 }

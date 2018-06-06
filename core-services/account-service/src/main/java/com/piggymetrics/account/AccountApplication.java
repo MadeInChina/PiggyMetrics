@@ -23,13 +23,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 @SpringBootApplication
-@EnableResourceServer
 @EnableDiscoveryClient
 @EnableOAuth2Client
 @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties
-public class AccountApplication extends ResourceServerConfigurerAdapter {
+public class AccountApplication {
 
   @Autowired private ResourceServerProperties sso;
 
@@ -59,12 +58,4 @@ public class AccountApplication extends ResourceServerConfigurerAdapter {
 //    return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
 //  }
 
-  @Override
-  public void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-        .antMatchers("/", "/demo", "/actuator/**")
-        .permitAll()
-        .anyRequest()
-        .authenticated();
-  }
 }
