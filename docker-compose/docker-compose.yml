@@ -150,7 +150,6 @@ services:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
       STATISTICS_SERVICE_PASSWORD: password
-      FIXER_ACCESS_KEY: ${REPLACE_THIS_YOUR_ACCESS_KEY_FROM_FIXER.IO}
     networks:
       - piggynet
     depends_on:
@@ -219,3 +218,4 @@ networks:
 
 volumes:
   gatling:
+  postgres:

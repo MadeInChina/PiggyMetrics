@@ -1,9 +1,10 @@
 package com.piggymetrics.account;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -12,14 +13,24 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class OAuth2ClientJwtConfig {
 
-  /** Use default token services */
-  @Bean
+  @Value("${security.oauth2.client.client-id}")
+  private String clientId;
+
+  @Value("${security.oauth2.client.client-secret}")
+  private String clientSecret;
+
+  @Value("${security.oauth2.resource.token-info-uri}")
+  private String tokenInfoUri;
+
+  /** Use remote token services */
   @Primary
-  public DefaultTokenServices tokenServices(TokenStore tokenStore) {
-    DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-    defaultTokenServices.setTokenStore(tokenStore);
-    defaultTokenServices.setSupportRefreshToken(true);
-    return defaultTokenServices;
+  @Bean
+  public RemoteTokenServices tokenServices() {
+    final RemoteTokenServices tokenService = new RemoteTokenServices();
+    tokenService.setCheckTokenEndpointUrl(tokenInfoUri);
+    tokenService.setClientId(clientId);
+    tokenService.setClientSecret(clientSecret);
+    return tokenService;
   }
 
   @Bean
