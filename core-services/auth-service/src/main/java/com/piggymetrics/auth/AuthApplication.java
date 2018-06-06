@@ -22,8 +22,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @SpringBootApplication
 @EnableResourceServer
@@ -37,13 +37,14 @@ public class AuthApplication {
 
   @Configuration
   /**
-   * @EnableWebSecurity The configuration creates a Servlet Filter known as the springSecurityFilterChain which is responsible for all the security
-   * WebSecurityConfig only contains information about how to authenticate our users.
+   * @EnableWebSecurity The configuration creates a Servlet Filter known as the
+   * springSecurityFilterChain which is responsible for all the security WebSecurityConfig only
+   * contains information about how to authenticate our users.
    */
   @EnableWebSecurity
   /**
-   * WebSecurityConfigurerAdapter
-   * How does Spring Security know that we want to require all users to be authenticated? How does Spring Security know we want to support form based authentication
+   * WebSecurityConfigurerAdapter How does Spring Security know that we want to require all users to
+   * be authenticated? How does Spring Security know we want to support form based authentication
    */
   protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -74,13 +75,13 @@ public class AuthApplication {
   @EnableAuthorizationServer
   protected static class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-    private TokenStore tokenStore = new InMemoryTokenStore();
-
     @Autowired private AuthenticationManager authenticationManager;
 
     @Autowired private MongoUserDetailsService userDetailsService;
 
     @Autowired private Environment env;
+
+    @Autowired private JwtTokenStore jwtTokenStore;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -90,6 +91,8 @@ public class AuthApplication {
           .withClient("browser")
           .authorizedGrantTypes("refresh_token", "password")
           .scopes("ui")
+          .accessTokenValiditySeconds(3600)
+          .refreshTokenValiditySeconds(3600)
           .and()
           .withClient("account-service")
           .secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
@@ -110,7 +113,7 @@ public class AuthApplication {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
       endpoints
-          .tokenStore(tokenStore)
+          .tokenStore(jwtTokenStore)
           .authenticationManager(authenticationManager)
           .userDetailsService(userDetailsService);
     }
@@ -128,5 +131,12 @@ public class AuthApplication {
   @Bean
   public static NoOpPasswordEncoder passwordEncoder() {
     return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+  }
+
+  @Bean
+  public JwtTokenStore tokenStore() {
+    JwtAccessTokenConverter enhancer = new JwtAccessTokenConverter();
+    enhancer.setSigningKey("for-test-only");
+    return new JwtTokenStore(enhancer);
   }
 }
