@@ -42,7 +42,7 @@ public class OAuth2ClientJwtConfig {
   @Bean
   public JwtAccessTokenConverter jwtAccessTokenConverter() {
     JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-    converter.setSigningKey("for-test-only");
+    converter.setSigningKey("123456");
     return converter;
   }
 }
