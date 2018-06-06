@@ -4,7 +4,6 @@ import com.piggymetrics.account.service.security.CustomUserInfoTokenServices;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,7 +29,6 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties
-@EnableAutoConfiguration
 public class AccountApplication extends ResourceServerConfigurerAdapter {
 
   @Autowired private ResourceServerProperties sso;
