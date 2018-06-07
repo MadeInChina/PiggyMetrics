@@ -4,6 +4,7 @@ import com.piggymetrics.auth.service.security.MongoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -56,6 +58,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
     endpoints
         .tokenStore(jwtTokenStore)
+        .tokenServices(tokenServices())
         .authenticationManager(authenticationManager)
         .userDetailsService(userDetailsService);
   }
@@ -67,9 +70,25 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
   @Bean
   public JwtTokenStore tokenStore() {
+
+    return new JwtTokenStore(accessTokenConverter());
+  }
+
+  @Bean
+  public JwtAccessTokenConverter accessTokenConverter() {
     JwtAccessTokenConverter enhancer = new JwtAccessTokenConverter();
     enhancer.setSigningKey("123456");
-    return new JwtTokenStore(enhancer);
+    return enhancer;
+  }
+
+  @Bean
+  @Primary
+  public DefaultTokenServices tokenServices() {
+    DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+    defaultTokenServices.setTokenStore(tokenStore());
+    defaultTokenServices.setSupportRefreshToken(true);
+    defaultTokenServices.setTokenEnhancer(accessTokenConverter());
+    return defaultTokenServices;
   }
 
   // Troubleshooting
