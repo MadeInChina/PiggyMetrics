@@ -24,6 +24,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @SpringBootApplication
 @EnableResourceServer
@@ -74,7 +76,7 @@ public class AuthApplication {
   @EnableAuthorizationServer
   protected static class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-    private TokenStore tokenStore = new InMemoryTokenStore();
+    @Autowired private JwtTokenStore jwtTokenStore;
 
     @Autowired private AuthenticationManager authenticationManager;
 
@@ -110,7 +112,7 @@ public class AuthApplication {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
       endpoints
-          .tokenStore(tokenStore)
+          .tokenStore(jwtTokenStore)
           .authenticationManager(authenticationManager)
           .userDetailsService(userDetailsService);
     }
@@ -119,6 +121,13 @@ public class AuthApplication {
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
       oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
     }
+  }
+
+  @Bean
+  public JwtTokenStore tokenStore() {
+    JwtAccessTokenConverter enhancer = new JwtAccessTokenConverter();
+    enhancer.setSigningKey("123456");
+    return new JwtTokenStore(enhancer);
   }
 
   // Troubleshooting
