@@ -9,11 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(
-  name = "auth-service",
-  fallbackFactory = AuthServiceClientFallbackFactory.class,
-  configuration = TokenForwardClientConfig.class
-)
+@FeignClient(name = "auth-service", fallbackFactory = AuthServiceClientFallbackFactory.class)
 public interface AuthServiceClient {
 
   @RequestMapping(
