@@ -95,7 +95,7 @@ public class AccountApplication extends ResourceServerConfigurerAdapter {
   @Bean
   public JwtAccessTokenConverter accessTokenConverter() {
     JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-    converter.setSigningKey("123");
+    converter.setSigningKey("123456");
     return converter;
   }
 }
