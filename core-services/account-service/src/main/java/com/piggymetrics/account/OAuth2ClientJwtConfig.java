@@ -1,6 +1,7 @@
 //package com.piggymetrics.account;
 //
 //import feign.RequestInterceptor;
+//import feign.RequestTemplate;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.autoconfigure.security.oauth2.OAuth2ClientProperties;
 //import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
@@ -10,12 +11,15 @@
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.context.annotation.Primary;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
+//import org.springframework.security.oauth2.client.OAuth2ClientContext;
 //import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 //import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 //import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 //import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 //import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+//import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 //import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 //
 ///** Define Spring is going to manage the creation, signing and translation of a JWT token. */
@@ -61,7 +65,17 @@
 //  @Bean
 //  public RequestInterceptor oauth2FeignRequestInterceptor() {
 //    return new OAuth2FeignRequestInterceptor(
-//        new DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
+//        new DefaultOAuth2ClientContext(), clientCredentialsResourceDetails()) {
+//      @Override
+//      public void apply(RequestTemplate requestTemplate) {
+//
+//        OAuth2AuthenticationDetails details =
+//            (OAuth2AuthenticationDetails)
+//                SecurityContextHolder.getContext().getAuthentication().getDetails();
+//
+//        requestTemplate.header("Authorization", "bearer " + details.getTokenValue());
+//      }
+//    };
 //  }
 //
 //  @Bean
