@@ -56,7 +56,6 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
     endpoints
         .tokenStore(tokenStore())
-        .tokenServices(tokenServices())
         .accessTokenConverter(accessTokenConverter())
         .authenticationManager(authenticationManager)
         .userDetailsService(userDetailsService);
@@ -69,7 +68,6 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
   @Bean
   public JwtTokenStore tokenStore() {
-
     return new JwtTokenStore(accessTokenConverter());
   }
 
@@ -78,16 +76,6 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     JwtAccessTokenConverter enhancer = new JwtAccessTokenConverter();
     enhancer.setSigningKey("123456");
     return enhancer;
-  }
-
-  @Bean
-  @Primary
-  public DefaultTokenServices tokenServices() {
-    DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-    defaultTokenServices.setTokenStore(tokenStore());
-    defaultTokenServices.setSupportRefreshToken(true);
-    defaultTokenServices.setTokenEnhancer(accessTokenConverter());
-    return defaultTokenServices;
   }
 
   // Troubleshooting
