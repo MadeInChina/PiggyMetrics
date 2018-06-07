@@ -12,13 +12,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
 public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-  //  @Autowired private JwtTokenStore jwtTokenStore;
+  @Autowired private JwtTokenStore jwtTokenStore;
 
   @Autowired private AuthenticationManager authenticationManager;
 
@@ -54,7 +55,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
     endpoints
-        .tokenStore(new InMemoryTokenStore())
+        .tokenStore(jwtTokenStore)
         .authenticationManager(authenticationManager)
         .userDetailsService(userDetailsService);
   }
@@ -64,12 +65,12 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
   }
 
-  //  @Bean
-  //  public JwtTokenStore tokenStore() {
-  //    JwtAccessTokenConverter enhancer = new JwtAccessTokenConverter();
-  //    enhancer.setSigningKey("123456");
-  //    return new JwtTokenStore(enhancer);
-  //  }
+  @Bean
+  public JwtTokenStore tokenStore() {
+    JwtAccessTokenConverter enhancer = new JwtAccessTokenConverter();
+    enhancer.setSigningKey("123456");
+    return new JwtTokenStore(enhancer);
+  }
 
   // Troubleshooting
   // https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#getting-started-experience
