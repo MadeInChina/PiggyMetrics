@@ -65,13 +65,7 @@ public class AccountApplication extends ResourceServerConfigurerAdapter {
 //    return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
 //  }
 
-  @Bean
-  @Primary
-  public DefaultTokenServices tokenServices() {
-    DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-    defaultTokenServices.setTokenStore(tokenStore());
-    return defaultTokenServices;
-  }
+
 
   @Override
   public void configure(HttpSecurity http) throws Exception {
@@ -80,6 +74,14 @@ public class AccountApplication extends ResourceServerConfigurerAdapter {
         .permitAll()
         .anyRequest()
         .authenticated();
+  }
+
+  @Bean
+  @Primary
+  public DefaultTokenServices tokenServices() {
+    DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+    defaultTokenServices.setTokenStore(tokenStore());
+    return defaultTokenServices;
   }
 
   @Override
