@@ -21,8 +21,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-  @Autowired private JwtTokenStore jwtTokenStore;
-
   @Autowired private AuthenticationManager authenticationManager;
 
   @Autowired private MongoUserDetailsService userDetailsService;
@@ -57,8 +55,9 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
     endpoints
-        .tokenStore(jwtTokenStore)
+        .tokenStore(tokenStore())
         .tokenServices(tokenServices())
+        .accessTokenConverter(accessTokenConverter())
         .authenticationManager(authenticationManager)
         .userDetailsService(userDetailsService);
   }
