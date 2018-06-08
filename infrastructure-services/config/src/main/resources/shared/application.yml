@@ -14,8 +14,6 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
-  shareSecurityContext: true
-
   stream:
     maxConcurrentConnections: 20
 # https://github.com/spring-cloud/spring-cloud-netflix/issues/740
