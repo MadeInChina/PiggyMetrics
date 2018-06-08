@@ -17,6 +17,8 @@ hystrix:
 
   stream:
     maxConcurrentConnections: 20
+# https://github.com/spring-cloud/spring-cloud-netflix/issues/740
+#  if you set hystrix.stream.amqp.send-id=false to allow disabling of sending the context id as the metric id, Turbine AMQP then defaults to serviceId:host:port.
     queue:
       send-id: false
     bus:
