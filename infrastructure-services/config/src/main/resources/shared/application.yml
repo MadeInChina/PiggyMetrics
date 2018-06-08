@@ -14,6 +14,7 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
+  shareSecurityContext: true
 
   stream:
     maxConcurrentConnections: 20
