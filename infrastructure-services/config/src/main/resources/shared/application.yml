@@ -14,8 +14,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
+
   stream:
     maxConcurrentConnections: 20
+    queue:
+      send-id: false
     bus:
       enabled: true
   endpoint:
