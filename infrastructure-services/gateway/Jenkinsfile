@@ -16,7 +16,7 @@ pipeline {
             steps {
                 dir ('infrastructure-services/gateway') {
                     script {
-                        def app = docker.build 'slamhan/piggymetrics-gateway:2.0.3.RELEASE'
+                        def app = docker.build 'slamhan/piggymetrics-gateway:2.0.4-SNAPSHOT'
                         app.push()
                     }
                 }

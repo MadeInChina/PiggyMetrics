@@ -30,7 +30,7 @@ pipeline {
             steps {
                 dir ('account-service') {
                     script {
-                        def app = docker.build 'slamhan/piggymetrics-account-service:2.0.3.RELEASE'
+                        def app = docker.build 'slamhan/piggymetrics-account-service:2.0.4-SNAPSHOT'
                     }
                 }
             }
