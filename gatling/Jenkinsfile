@@ -16,7 +16,7 @@ pipeline {
             steps {
                 dir ('gatling') {
                     script {
-                        def app =  docker.build "slamhan/piggymetrics-gatling:2.0.2.RELEASE"
+                        def app =  docker.build "slamhan/piggymetrics-gatling:2.0.3.RELEASE"
                         app.push()
                     }
                 }

@@ -220,7 +220,7 @@ Here is a simple Continuous Delivery workflow, implemented in this project:
 
 <img width="880" src="https://cloud.githubusercontent.com/assets/6069066/14159789/0dd7a7ce-f6e9-11e5-9fbb-a7fe0f4431e3.png">
 
-In this [configuration](https://github.com/sqshq/PiggyMetrics/blob/master/.travis.yml), Travis CI builds tagged images for each successful git push. So, there are always `2.0.2.RELEASE` image for each microservice on [Docker Hub](https://hub.docker.com/r/sqshq/) and older images, tagged with git commit hash. It's easy to deploy any of them and quickly rollback, if needed.
+In this [configuration](https://github.com/sqshq/PiggyMetrics/blob/master/.travis.yml), Travis CI builds tagged images for each successful git push. So, there are always `2.0.3.RELEASE` image for each microservice on [Docker Hub](https://hub.docker.com/r/sqshq/) and older images, tagged with git commit hash. It's easy to deploy any of them and quickly rollback, if needed.
 
 ## How to run all the things?
 
@@ -232,7 +232,7 @@ Keep in mind, that you are going to start 8 Spring Boot applications, 4 MongoDB 
 - Make sure to build the project: `mvn package [-DskipTests]`
 
 #### Production mode
-In this mode, all 2.0.2.RELEASE images will be pulled from Docker Hub.
+In this mode, all 2.0.3.RELEASE images will be pulled from Docker Hub.
 Just copy `docker-compose.yml` and hit `docker-compose up`
 
 #### Development mode
