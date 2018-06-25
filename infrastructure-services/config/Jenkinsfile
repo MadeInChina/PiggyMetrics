@@ -1,27 +1,26 @@
-node {
-    withMaven(maven:'maven') {
+pipeline {
+    agent any
 
-        stage('Checkout') {
-            git url: 'https://github.com/MadeInChina/PiggyMetrics.git', credentialsId: 'github-slam', branch: 'master'
-        }
-
-        stage('Build') {
-           dir ('infrastructure-services/config') {
-                sh 'mvn clean install'
-
-                def pom = readMavenPom file:'pom.xml'
-                print pom.version
-                env.version = pom.version
-            }
-        }
-
-        stage('Image Build And Push') {
-            dir ('infrastructure-services/config') {
-                def app = docker.build "slamhan/piggymetrics-config:2.0.0.RELEASE"
-                app.push()
-            }
-        }
-
+    tools {
+            maven 'maven'
     }
-
+    stages {
+        stage('Build') {
+            steps {
+                dir ('infrastructure-services/config') {
+                   sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Image Build And Push') {
+            steps {
+                dir ('infrastructure-services/config') {
+                    script {
+                        def app = docker.build 'slamhan/piggymetrics-config:2.0.2.RELEASE'
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
 }

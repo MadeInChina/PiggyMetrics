@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    tools {
+            maven 'maven'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                dir ('infrastructure-services/admin') {
+                   sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Image Build And Push') {
+            steps {
+                dir ('infrastructure-services/admin') {
+                    script {
+                        def app = docker.build 'slamhan/piggymetrics-admin:2.0.2.RELEASE'
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
+}

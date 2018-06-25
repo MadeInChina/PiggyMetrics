@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    tools {
+            maven 'maven'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                dir ('gatling') {
+                   sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Image Build And Push') {
+            steps {
+                dir ('gatling') {
+                    script {
+                        def app =  docker.build "slamhan/piggymetrics-gatling:2.0.2.RELEASE"
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
+}

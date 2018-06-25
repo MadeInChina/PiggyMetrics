@@ -1,0 +1,8 @@
+[
+  {
+    "description": "any response",
+    "response": {
+      "file": "src/test/resources/data.json"
+    }
+  }
+]

@@ -4,4 +4,4 @@ MAINTAINER renwei.han <slamhan1987@hotmail.com>
 ADD ./target/turbine.jar /app/
 CMD ["java", "-Xmx200m", "-jar", "/app/turbine.jar"]
 
-EXPOSE 8989
+EXPOSE 8080

@@ -22,4 +22,4 @@ server:
   port: 7000
 
 rates:
-  url: http://api.fixer.io
+  url: http://fixer-api:8080

@@ -18,7 +18,7 @@ after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 
   #TAG
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "2.0.0.RELEASE"; else echo $TRAVIS_BRANCH ; fi`
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "2.0.2.RELEASE"; else echo $TRAVIS_BRANCH ; fi`
 
   # CONFIG SERVICE
   - export CONFIG=sqshq/piggymetrics-config

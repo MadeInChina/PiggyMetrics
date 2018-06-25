@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID, branch: 'master'
+                git url: env.REPO_URL, credentialsId: env.CREDENTIALS_ID, branch: 'Finchley.BUILD-SNAPSHOT'
             }
         }
         stage('Build') {
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 dir ('account-service') {
                     script {
-                        def app = docker.build 'slamhan/piggymetrics-account-service:2.0.0.RELEASE'
+                        def app = docker.build 'slamhan/piggymetrics-account-service:2.0.2.RELEASE'
                     }
                 }
             }

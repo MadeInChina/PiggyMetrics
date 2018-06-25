@@ -13,4 +13,4 @@ spring:
       port: 0
 
 rates:
-  url: http://api.fixer.io
+  url: http://localhost:1080/api

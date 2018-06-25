@@ -81,7 +81,7 @@ $(window).load(function () {
     global.mobileClient = true;
   }
 
-  $.getJSON("http://api.fixer.io/latest?base=RUB", function (data) {
+  $.getJSON("https://frankfurter.app/latest?base=RUB", function (data) {
     global.eur = 1 / data.rates.EUR;
     global.usd = 1 / data.rates.USD;
   });

@@ -1,12 +1,54 @@
 version: '2.1'
 services:
+#################fixer########################################
+  fixer-db:
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  fixer-api:
+    image: hakanensari/fixer
+    command: unicorn -c config/unicorn.rb
+    entrypoint: bin/wait-for-it.sh fixer-db:5432 -s --
+    environment:
+      DATABASE_URL: postgres://postgres@fixer-db/postgres
+      RACK_ENV: development
+      VIRTUAL_HOST: localhost
+    ports:
+      - 9080:8080/tcp
+  fixer-scheduler:
+    image: hakanensari/fixer
+    command: bin/schedule
+    entrypoint: bin/wait-for-it.sh fixer-db:5432 -s --
+    environment:
+      DATABASE_URL: postgres://postgres@fixer-db/postgres
+##################Testing#####################################
+  gatling:
+    image: slamhan/piggymetrics-gatling:2.0.2.RELEASE
+    environment:
+      BASE_URL: http://gateway:4000
+      CONCURRENCY: 10
+    command: [com.piggymetrics.gatling.AccountServiceSimulation]
+    volumes:
+      - gatling:/gatling/results
+    networks:
+      - piggynet
 ##################Infrastructure Services#####################
-  turbine:
-    image: slamhan/piggymetrics-turbine:2.0.0.RELEASE
+  admin:
+    image: slamhan/piggymetrics-admin:2.0.2.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
-      - 8989:8989/tcp
+      - 8200:8080/tcp
+    networks:
+      - piggynet
+    depends_on:
+      config:
+        condition: service_healthy
+  turbine:
+    image: slamhan/piggymetrics-turbine:2.0.2.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    ports:
       - 8300:8080/tcp
     networks:
       - piggynet
@@ -14,7 +56,7 @@ services:
       config:
         condition: service_healthy
   registry:
-    image: slamhan/piggymetrics-registry:2.0.0.RELEASE
+    image: slamhan/piggymetrics-registry:2.0.2.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -40,20 +82,20 @@ services:
       rabbitmq:
         condition: service_started
   auth-mongodb:
-    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    image: slamhan/piggymetrics-mongodb:2.0.2.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   account-mongodb:
-    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    image: slamhan/piggymetrics-mongodb:2.0.2.RELEASE
     environment:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   monitoring:
-    image: slamhan/piggymetrics-monitoring:2.0.0.RELEASE
+    image: slamhan/piggymetrics-monitoring:2.0.2.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -71,25 +113,25 @@ services:
     networks:
       - piggynet
   statistics-mongodb:
-    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    image: slamhan/piggymetrics-mongodb:2.0.2.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   notification-mongodb:
-    image: slamhan/piggymetrics-mongodb:2.0.0.RELEASE
+    image: slamhan/piggymetrics-mongodb:2.0.2.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   config:
-    image: slamhan/piggymetrics-config:2.0.0.RELEASE
+    image: slamhan/piggymetrics-config:2.0.2.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     networks:
       - piggynet
   gateway:
-    image: slamhan/piggymetrics-gateway:2.0.0.RELEASE
+    image: slamhan/piggymetrics-gateway:2.0.2.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -103,7 +145,7 @@ services:
         condition: service_healthy
 ##################Core Services#####################
   statistics-service:
-    image: slamhan/piggymetrics-statistics-service:2.0.0.RELEASE
+    image: slamhan/piggymetrics-statistics-service:2.0.2.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
@@ -118,7 +160,7 @@ services:
       statistics-mongodb:
         condition: service_started
   notification-service:
-    image: slamhan/piggymetrics-notification-service:2.0.0.RELEASE
+    image: slamhan/piggymetrics-notification-service:2.0.2.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
@@ -133,7 +175,7 @@ services:
       notification-mongodb:
         condition: service_started
   auth-service:
-    image: slamhan/piggymetrics-auth-service:2.0.0.RELEASE
+    image: slamhan/piggymetrics-auth-service:2.0.2.RELEASE
     environment:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password
@@ -150,16 +192,20 @@ services:
       auth-mongodb:
         condition: service_started
   account-service:
-    image: slamhan/piggymetrics-account-service:2.0.0.RELEASE
+    image: slamhan/piggymetrics-account-service:2.0.2.RELEASE
     environment:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
-#      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y
-    ports:
-      - 8000:8000
+#     JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y
+#    ports:
+#      - 8000:8000
     networks:
       - piggynet
+#    healthcheck:
+#      test: curl -f http://localhost:6000/accounts/actuator/health || exit 1
+#      interval: 10s
+#      timeout: 60s
     depends_on:
       config:
         condition: service_healthy
@@ -169,3 +215,7 @@ services:
         condition: service_started
 networks:
   piggynet:
+
+volumes:
+  gatling:
+  postgres:
