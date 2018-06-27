@@ -107,7 +107,8 @@ services:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
       STATISTICS_SERVICE_PASSWORD: password
-      FIXER_ACCESS_KEY: ${REPLACE_THIS_YOUR_ACCESS_KEY_FROM_FIXER.IO}
+    external_links:
+    - fixer/fixer-api:fixer-api
     networks:
       - piggynet
   notification-service:
