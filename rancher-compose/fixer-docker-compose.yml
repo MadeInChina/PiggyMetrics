@@ -1,0 +1,36 @@
+version: '2'
+volumes:
+  postgres: {}
+services:
+  scheduler:
+    image: hakanensari/fixer
+    environment:
+      DATABASE_URL: postgres://postgres@db/postgres
+    entrypoint:
+    - bin/wait-for-it.sh
+    - db:5432
+    - -s
+    - --
+    command:
+    - bin/schedule
+  fixer-api:
+    image: hakanensari/fixer
+    environment:
+      DATABASE_URL: postgres://postgres@db/postgres
+      RACK_ENV: development
+      VIRTUAL_HOST: localhost
+    entrypoint:
+    - bin/wait-for-it.sh
+    - db:5432
+    - -s
+    - --
+    ports:
+    - 9080:8080/tcp
+    command:
+    - unicorn
+    - -c
+    - config/unicorn.rb
+  db:
+    image: postgres
+    volumes:
+    - postgres:/var/lib/postgresql/data
