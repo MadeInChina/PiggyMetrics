@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       targetPort: 8888
   selector:
-    name: config
+    io.kompose.service: config
