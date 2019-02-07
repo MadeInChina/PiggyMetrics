@@ -28,7 +28,7 @@ pipeline {
             steps {
                 dir ('infrastructure-services/config/yaml/service') {
                     withKubeConfig(credentialsId: 'kube-local-test.config') {
-                        sh 'kubectl create -f config-service.yaml'
+                        sh 'kubectl apply -f config-service.yaml'
                     }
                 }
             }
