@@ -4,7 +4,7 @@ metadata:
   name: config
   namespace: piggmetrics
   labels:
-    name: config
+    io.kompose.service: config
 spec:
   replicas: 1
   revisionHistoryLimit: 1
@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-        name: config
+        io.kompose.service: config
     spec:
       terminationGracePeriodSeconds: 120
       containers:
@@ -33,11 +33,3 @@ spec:
             tcpSocket:
               port: 8888
             timeoutSeconds: 5
-          resources:
-            requests:
-              cpu: 100m
-              memory: 300Mi
-            limits:
-              cpu: 1000m
-              memory: 1000Mi
-
