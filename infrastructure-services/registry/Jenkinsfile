@@ -28,8 +28,7 @@ pipeline {
             steps {
                 dir('infrastructure-services/registry/yaml/service') {
                     withKubeConfig(credentialsId: 'kube-local-test.config') {
-                        sh 'kubectl get pods'
-                        sh 'kubectl apply -f registry-service.yaml'
+                        sh 'kubectl create -f registry-service.yaml'
                     }
                 }
             }
