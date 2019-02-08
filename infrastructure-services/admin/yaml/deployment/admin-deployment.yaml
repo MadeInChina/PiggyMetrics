@@ -10,7 +10,7 @@ spec:
   ports:
     - port: 8200
       protocol: TCP
-      targetPort: 8888
+      targetPort: 8080
   selector:
     io.kompose.service: admin
 ---
