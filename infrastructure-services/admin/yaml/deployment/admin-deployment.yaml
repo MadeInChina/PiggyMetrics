@@ -20,6 +20,7 @@ metadata:
   labels:
     io.kompose.service: admin
   name: admin
+  namespace: piggmetrics
 spec:
   replicas: 1
   strategy:
