@@ -26,9 +26,9 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                dir ('infrastructure-services/config/yaml/service') {
+                dir ('infrastructure-services/config/yaml/deployment') {
                     withKubeConfig(credentialsId: 'kube-local-test.config') {
-                        sh 'kubectl apply -f config-service.yaml'
+                        sh 'kubectl apply -f config-deployment.yaml'
                     }
                 }
             }
