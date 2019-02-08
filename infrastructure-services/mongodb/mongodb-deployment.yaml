@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: account-service
+  labels:
+    run: account-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: account-service
+    spec:
+      containers:
+        - name: account-service
+          image: slamhan/piggymetrics-account-service:2.0.4-SNAPSHOT
+        - name: account-mongo
+          image: slamhan/piggymetrics-mongodb:2.0.4-SNAPSHOT
+          - env:
+              - name: MONGODB_PASSWORD
+                value: password
+              - name: INIT_DUMP
+                value: account-service-dump.js

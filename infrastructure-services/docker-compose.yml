@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2'
 services:
   turbine:
     image: slamhan/piggymetrics-turbine:2.0.1.RELEASE
@@ -8,9 +8,6 @@ services:
       - 8300:8080/tcp
     networks:
       - piggynet
-    depends_on:
-      config:
-        condition: service_healthy
   registry:
     image: slamhan/piggymetrics-registry:2.0.4-SNAPSHOT
     environment:
@@ -19,9 +16,6 @@ services:
       - 8761:8761/tcp
     networks:
       - piggynet
-    depends_on:
-      config:
-        condition: service_healthy
   tracing:
     image: openzipkin/zipkin
     environment:
@@ -32,11 +26,6 @@ services:
       - 9411:9411/tcp
     networks:
       - piggynet
-    depends_on:
-      config:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_started
   auth-mongodb:
     image: slamhan/piggymetrics-mongodb:2.0.4-SNAPSHOT
     environment:
@@ -58,9 +47,6 @@ services:
     - 9000:8080/tcp
     networks:
     - piggynet
-    depends_on:
-      config:
-        condition: service_healthy
   rabbitmq:
     image: rabbitmq:3-management
     ports:
@@ -94,10 +80,5 @@ services:
     - 4000:4000/tcp
     networks:
     - piggynet
-    depends_on:
-      config:
-        condition: service_healthy
-      registry:
-        condition: service_healthy
 networks:
   piggynet:

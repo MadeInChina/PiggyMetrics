@@ -4,6 +4,7 @@ metadata:
   labels:
     io.kompose.service: registry
   name: registry
+  namespace: piggmetrics
 spec:
   ports:
     - name: "8761"
