@@ -15,9 +15,20 @@ pipeline {
         stage('Image Build And Push') {
             steps {
                 dir ('infrastructure-services/gateway') {
-                    script {
-                        def app = docker.build 'slamhan/piggymetrics-gateway:2.0.4-SNAPSHOT'
-                        app.push()
+                    withDockerRegistry([credentialsId: "slamhan-dockerhub-repo", url: ""]) {
+                        script {
+                            def app = docker.build 'slamhan/piggymetrics-gateway:2.0.4-SNAPSHOT'
+                            app.push()
+                        }
+                    }
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                dir ('infrastructure-services/gateway/yaml/deployment') {
+                    withKubeConfig(credentialsId: 'kube-local-test.config') {
+                        sh 'kubectl apply -f gateway-deployment.yaml'
                     }
                 }
             }
