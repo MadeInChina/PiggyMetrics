@@ -6,7 +6,6 @@ metadata:
   name: admin
   namespace: piggmetrics
 spec:
-  type: ClusterIP
   ports:
     - name: "8080to8200"
       port: 8080
