@@ -6,10 +6,6 @@ metadata:
   name: admin
   namespace: piggmetrics
 spec:
-  ports:
-    - name: "8080to8200"
-      port: 8080
-      targetPort: 8200
   selector:
     io.kompose.service: admin
 ---
@@ -39,4 +35,7 @@ spec:
           name: registry
           ports:
             - containerPort: 8080
+              hostPort: 8200
+              name: 8080tcp82000
+              protocol: TCP
       restartPolicy: Always

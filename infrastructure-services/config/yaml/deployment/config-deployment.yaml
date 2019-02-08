@@ -6,11 +6,6 @@ metadata:
   name: config
   namespace: piggmetrics
 spec:
-  type: ClusterIP
-  ports:
-    - port: 8888
-      protocol: TCP
-      targetPort: 8888
   selector:
     io.kompose.service: config
 ---
@@ -40,4 +35,8 @@ spec:
           name: registry
           ports:
             - containerPort: 8888
+              hostPort: 8888
+              name: 8888tcp8888
+              protocol: TCP
+
       restartPolicy: Always

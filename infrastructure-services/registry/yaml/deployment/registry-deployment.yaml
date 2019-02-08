@@ -6,10 +6,6 @@ metadata:
   name: registry
   namespace: piggmetrics
 spec:
-  ports:
-    - name: "8761"
-      port: 8761
-      targetPort: 8761
   selector:
     io.kompose.service: registry
 ---
@@ -38,5 +34,8 @@ spec:
           image: slamhan/piggymetrics-registry:2.0.4-SNAPSHOT
           name: registry
           ports:
-            - containerPort: 8761
+          - containerPort: 8761
+            hostPort: 8761
+            name: 8761tcp8761
+            protocol: TCP
       restartPolicy: Always
