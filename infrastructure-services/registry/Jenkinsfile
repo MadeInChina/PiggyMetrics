@@ -26,9 +26,9 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                dir('infrastructure-services/registry/yaml/service') {
+                dir('infrastructure-services/registry/yaml/deployment') {
                     withKubeConfig(credentialsId: 'kube-local-test.config') {
-                        sh 'kubectl apply -f registry-service.yaml'
+                        sh 'kubectl apply -f registry-deployment.yaml'
                     }
                 }
             }

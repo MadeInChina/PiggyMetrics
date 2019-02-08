@@ -1,13 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: registry
+  name: registry
+spec:
+  ports:
+    - name: "8761"
+      port: 8761
+      targetPort: 8761
+  selector:
+    io.kompose.service: registry
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: registry
-  namespace: piggmetrics
   labels:
     io.kompose.service: registry
+  name: registry
 spec:
   replicas: 1
-  revisionHistoryLimit: 1
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -17,19 +29,12 @@ spec:
       labels:
         io.kompose.service: registry
     spec:
-      terminationGracePeriodSeconds: 120
       containers:
         - env:
             - name: CONFIG_SERVICE_PASSWORD
               value: password
-          name: registry
           image: slamhan/piggymetrics-registry:2.0.4-SNAPSHOT
-          imagePullPolicy: IfNotPresent
-          readinessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            tcpSocket:
-              port: 8761
-            timeoutSeconds: 5
+          name: registry
+          ports:
+            - containerPort: 8761
+      restartPolicy: Always
