@@ -1,4 +1,4 @@
-FROM slamhan/gatling:latest
+FROM registry.docker.com/gatling:latest
 
 MAINTAINER renwei.han <slamhan1987@hotmail.com>
 

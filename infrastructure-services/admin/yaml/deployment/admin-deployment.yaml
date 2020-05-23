@@ -31,7 +31,7 @@ spec:
         - env:
             - name: CONFIG_SERVICE_PASSWORD
               value: password
-          image: slamhan/piggymetrics-admin:2.0.4-SNAPSHOT
+          image: registry.docker.com/piggymetrics-admin:2.3.0.RELEASE
           name: registry
           ports:
             - containerPort: 8080

@@ -16,7 +16,7 @@ pipeline {
             steps {
                 dir ('core-services/notification-service') {
                     script {
-                        def app = docker.build 'slamhan/piggymetrics-notification-service:2.0.4-SNAPSHOT'
+                        def app = docker.build 'registry.docker.com/piggymetrics-notification-service:2.3.0.RELEASE'
                         app.push()
                     }
                 }

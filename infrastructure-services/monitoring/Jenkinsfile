@@ -16,7 +16,7 @@ pipeline {
             steps {
                 dir ('infrastructure-services/monitoring') {
                     script {
-                        def app = docker.build 'slamhan/piggymetrics-monitoring:2.0.4-SNAPSHOT'
+                        def app = docker.build 'registry.docker.com/piggymetrics-monitoring:2.3.0.RELEASE'
                         app.push()
                     }
                 }
