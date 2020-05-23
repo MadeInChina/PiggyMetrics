@@ -1,12 +1,12 @@
 # Docker Gatling 2.3.1
 
-    docker build -t slamhan/gatling:2.3.1 .
+    docker build -t registry.docker.com/gatling:2.3.1 .
 
-    docker run --rm slamhan/gatling:2.3.1 computerdatabase.BasicSimulation
+    docker run --rm registry.docker.com/gatling:2.3.1 computerdatabase.BasicSimulation
 
-    docker run --rm -v $(pwd)/results:/gatling/results slamhan/gatling:2.3.1 computerdatabase.BasicSimulation
+    docker run --rm -v $(pwd)/results:/gatling/results registry.docker.com/gatling:2.3.1 computerdatabase.BasicSimulation
 
-    docker run --rm -v $(pwd)/results:/gatling/results -v $(pwd)/user-files:/gatling/user-files slamhan/gatling:2.3.1 sample.BasicSimulation
+    docker run --rm -v $(pwd)/results:/gatling/results -v $(pwd)/user-files:/gatling/user-files registry.docker.com/gatling:2.3.1 sample.BasicSimulation
 
 ### Example directories
 

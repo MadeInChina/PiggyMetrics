@@ -15,9 +15,20 @@ pipeline {
         stage('Image Build And Push') {
             steps {
                 dir ('infrastructure-services/config') {
-                    script {
-                        def app = docker.build 'slamhan/piggymetrics-config:2.0.3.RELEASE'
-                        app.push()
+                    withDockerRegistry([credentialsId: "slamhan-dockerhub-repo", url: ""]) {
+                        script {
+                            def app = docker.build 'registry.docker.com/piggymetrics-config:2.3.0.RELEASE'
+                            app.push()
+                        }
+                    }
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                dir ('infrastructure-services/config/yaml/deployment') {
+                    withKubeConfig(credentialsId: 'kube-local-test.config') {
+                        sh 'kubectl apply -f config-deployment.yaml'
                     }
                 }
             }

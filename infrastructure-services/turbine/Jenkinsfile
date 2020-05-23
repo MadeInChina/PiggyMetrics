@@ -16,7 +16,7 @@ pipeline {
             steps {
                 dir ('infrastructure-services/turbine') {
                     script {
-                        def app = docker.build "slamhan/piggymetrics-turbine:2.0.3.RELEASE"
+                        def app = docker.build "registry.docker.com/piggymetrics-turbine:2.3.0.RELEASE"
                         app.push()
                     }
                 }

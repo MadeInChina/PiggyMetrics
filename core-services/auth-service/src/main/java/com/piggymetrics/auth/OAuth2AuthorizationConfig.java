@@ -72,9 +72,9 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
   // Troubleshooting
   // https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#getting-started-experience
   // java.lang.IllegalArgumentException: There is no PasswordEncoder mapped for the id "null"
-  @SuppressWarnings("deprecation")
-  @Bean
-  public static NoOpPasswordEncoder passwordEncoder() {
-    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-  }
+//  @SuppressWarnings("deprecation")
+//  @Bean
+//  public static NoOpPasswordEncoder passwordEncoder() {
+//    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+//  }
 }

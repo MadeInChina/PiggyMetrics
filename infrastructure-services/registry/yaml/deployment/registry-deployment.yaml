@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: registry
+  name: registry
+  namespace: piggmetrics
+spec:
+  selector:
+    io.kompose.service: registry
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: registry
+  name: registry
+  namespace: piggmetrics
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: registry
+    spec:
+      containers:
+        - env:
+            - name: CONFIG_SERVICE_PASSWORD
+              value: password
+          image: registry.docker.com/piggymetrics-registry:2.3.0.RELEASE
+          name: registry
+          ports:
+          - containerPort: 8761
+            hostPort: 8761
+            name: 8761tcp8761
+            protocol: TCP
+      restartPolicy: Always

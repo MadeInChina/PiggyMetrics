@@ -2,7 +2,7 @@ version: '2'
 services:
 ##################Testing#####################################
   gatling:
-    image: slamhan/piggymetrics-gatling:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-gatling:2.3.0.RELEASE
     environment:
       BASE_URL: http://gateway:4000
       CONCURRENCY: 10
@@ -13,7 +13,7 @@ services:
       - piggynet
 ##################Infrastructure Services#####################
   admin:
-    image: slamhan/piggymetrics-admin:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-admin:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -21,7 +21,7 @@ services:
     networks:
       - piggynet
   turbine:
-    image: slamhan/piggymetrics-turbine:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-turbine:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -29,7 +29,7 @@ services:
     networks:
       - piggynet
   registry:
-    image: slamhan/piggymetrics-registry:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-registry:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -47,20 +47,20 @@ services:
     networks:
       - piggynet
   auth-mongodb:
-    image: slamhan/piggymetrics-mongodb:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   account-mongodb:
-    image: slamhan/piggymetrics-mongodb:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   monitoring:
-    image: slamhan/piggymetrics-monitoring:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-monitoring:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -75,25 +75,25 @@ services:
     networks:
       - piggynet
   statistics-mongodb:
-    image: slamhan/piggymetrics-mongodb:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   notification-mongodb:
-    image: slamhan/piggymetrics-mongodb:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   config:
-    image: slamhan/piggymetrics-config:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-config:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     networks:
       - piggynet
   gateway:
-    image: slamhan/piggymetrics-gateway:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-gateway:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -102,7 +102,7 @@ services:
       - piggynet
 ##################Core Services#####################
   statistics-service:
-    image: slamhan/piggymetrics-statistics-service:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-statistics-service:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
@@ -112,7 +112,7 @@ services:
     networks:
       - piggynet
   notification-service:
-    image: slamhan/piggymetrics-notification-service:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-notification-service:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
@@ -120,7 +120,7 @@ services:
     networks:
       - piggynet
   auth-service:
-    image: slamhan/piggymetrics-auth-service:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-auth-service:2.3.0.RELEASE
     environment:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password
@@ -130,7 +130,7 @@ services:
     networks:
       - piggynet
   account-service:
-    image: slamhan/piggymetrics-account-service:2.0.3.RELEASE
+    image: registry.docker.com/piggymetrics-account-service:2.3.0.RELEASE
     environment:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password

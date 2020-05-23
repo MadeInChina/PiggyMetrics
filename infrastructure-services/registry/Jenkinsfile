@@ -2,22 +2,33 @@ pipeline {
     agent any
 
     tools {
-            maven 'maven'
+        maven 'maven'
     }
     stages {
         stage('Build') {
             steps {
-                dir ('infrastructure-services/registry') {
-                   sh 'mvn clean install'
+                dir('infrastructure-services/registry') {
+                    sh 'mvn clean install'
                 }
             }
         }
         stage('Image Build And Push') {
             steps {
-                dir ('infrastructure-services/registry') {
-                    script {
-                        def app = docker.build 'slamhan/piggymetrics-registry:2.0.3.RELEASE'
-                        app.push()
+                dir('infrastructure-services/registry') {
+                    withDockerRegistry([credentialsId: "slamhan-dockerhub-repo", url: ""]) {
+                        script {
+                            def app = docker.build 'registry.docker.com/piggymetrics-registry:2.3.0.RELEASE'
+                            app.push()
+                        }
+                    }
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                dir('infrastructure-services/registry/yaml/deployment') {
+                    withKubeConfig(credentialsId: 'kube-local-test.config') {
+                        sh 'kubectl apply -f registry-deployment.yaml'
                     }
                 }
             }
