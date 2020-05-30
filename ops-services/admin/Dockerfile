@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-slim
+FROM openjdk:8-jre
 MAINTAINER renwei.han <slamhan1987@hotmail.com>
 
 ADD ./target/admin.jar /app/

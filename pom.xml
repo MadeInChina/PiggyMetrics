@@ -13,6 +13,7 @@
 
   <modules>
     <module>infrastructure-services</module>
+    <module>ops-services</module>
     <module>core-services</module>
   </modules>
 

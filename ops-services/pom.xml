@@ -8,14 +8,14 @@
     <!--<relativePath /> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
   </parent>
 
-  <artifactId>infrastructure-services</artifactId>
+  <artifactId>ops-services</artifactId>
   <packaging>pom</packaging>
-  <name>infrastructure-services</name>
+  <name>ops-services</name>
 
   <modules>
-    <module>turbine</module> <!-- https://github.com/spring-cloud/spring-cloud-sleuth/issues/727 -->
-    <module>registry</module>
-    <module>gateway</module>
+    <module>admin</module>
+    <module>config</module>
+    <module>monitoring</module>
   </modules>
 
   <dependencies>

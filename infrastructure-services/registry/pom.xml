@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.piggymetrics</groupId>
-        <artifactId>infrastructure-services</artifactId>
-        <version>2.3.0.RELEASE</version>
-        <!--<relativePath /> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
-    </parent>
-
+  <parent>
     <groupId>com.piggymetrics</groupId>
-    <artifactId>registry</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>infrastructure-services</artifactId>
+    <version>2.3.0.RELEASE</version>
+    <!--<relativePath /> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+  </parent>
 
-    <name>registry</name>
+  <groupId>com.piggymetrics</groupId>
+  <artifactId>registry</artifactId>
+  <packaging>jar</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+  <name>registry</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <!-- Adapter for a Eureka Spring Boot Server that allows Prometheus to use its Consul discovery service  -->
+    <!-- https://mvnrepository.com/artifact/at.twinformatics/eureka-consul-adapter -->
+    <dependency>
+      <groupId>at.twinformatics</groupId>
+      <artifactId>eureka-consul-adapter</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
 </project>
