@@ -23,7 +23,7 @@ services:
       DATABASE_URL: postgres://postgres@fixer-db/postgres
 ##################Testing#####################################
   gatling:
-    image: registry.docker.com/piggymetrics-gatling:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-gatling:2.3.0.RELEASE
     environment:
       BASE_URL: http://gateway:4000
       CONCURRENCY: 10
@@ -34,7 +34,7 @@ services:
       - piggynet
 ##################Infrastructure Services#####################
   admin:
-    image: registry.docker.com/piggymetrics-admin:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-admin:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -45,7 +45,7 @@ services:
       config:
         condition: service_healthy
   turbine:
-    image: registry.docker.com/piggymetrics-turbine:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-turbine:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -56,7 +56,7 @@ services:
       config:
         condition: service_healthy
   registry:
-    image: registry.docker.com/piggymetrics-registry:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-registry:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -82,20 +82,20 @@ services:
       rabbitmq:
         condition: service_started
   auth-mongodb:
-    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   account-mongodb:
-    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   monitoring:
-    image: registry.docker.com/piggymetrics-monitoring:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-monitoring:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -113,25 +113,25 @@ services:
     networks:
       - piggynet
   statistics-mongodb:
-    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   notification-mongodb:
-    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   config:
-    image: registry.docker.com/piggymetrics-config:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-config:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     networks:
       - piggynet
   gateway:
-    image: registry.docker.com/piggymetrics-gateway:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-gateway:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -145,7 +145,7 @@ services:
         condition: service_healthy
 ##################Core Services#####################
   statistics-service:
-    image: registry.docker.com/piggymetrics-statistics-service:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-statistics-service:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
@@ -160,7 +160,7 @@ services:
       statistics-mongodb:
         condition: service_started
   notification-service:
-    image: registry.docker.com/piggymetrics-notification-service:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-notification-service:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
       MONGODB_PASSWORD: password
@@ -175,7 +175,7 @@ services:
       notification-mongodb:
         condition: service_started
   auth-service:
-    image: registry.docker.com/piggymetrics-auth-service:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-auth-service:2.3.0.RELEASE
     environment:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password
@@ -192,7 +192,7 @@ services:
       auth-mongodb:
         condition: service_started
   account-service:
-    image: registry.docker.com/piggymetrics-account-service:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-account-service:2.3.0.RELEASE
     environment:
       ACCOUNT_SERVICE_PASSWORD: password
       CONFIG_SERVICE_PASSWORD: password

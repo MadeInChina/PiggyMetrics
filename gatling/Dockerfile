@@ -1,4 +1,4 @@
-FROM registry.docker.com/gatling:latest
+FROM registry.homelab.org/gatling:latest
 
 MAINTAINER renwei.han <slamhan1987@hotmail.com>
 

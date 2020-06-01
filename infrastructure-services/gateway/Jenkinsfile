@@ -17,7 +17,7 @@ pipeline {
                 dir ('infrastructure-services/gateway') {
                     withDockerRegistry([credentialsId: "slamhan-dockerhub-repo", url: ""]) {
                         script {
-                            def app = docker.build 'registry.docker.com/piggymetrics-gateway:2.3.0.RELEASE'
+                            def app = docker.build 'registry.homelab.org/piggymetrics-gateway:2.3.0.RELEASE'
                             app.push()
                         }
                     }

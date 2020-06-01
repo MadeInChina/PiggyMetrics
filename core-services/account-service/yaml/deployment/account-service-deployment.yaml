@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 120
       containers:
         - name: account-service
-          image: registry.docker.com/piggymetrics-account-service:2.3.0.RELEASE
+          image: registry.homelab.org/piggymetrics-account-service:2.3.0.RELEASE
           imagePullPolicy: IfNotPresent
           readinessProbe:
             failureThreshold: 3

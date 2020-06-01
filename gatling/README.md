@@ -1,12 +1,12 @@
 # Docker Gatling 2.3.1
 
-    docker build -t registry.docker.com/gatling:2.3.1 .
+    docker build -t registry.homelab.org/gatling:2.3.1 .
 
-    docker run --rm registry.docker.com/gatling:2.3.1 computerdatabase.BasicSimulation
+    docker run --rm registry.homelab.org/gatling:2.3.1 computerdatabase.BasicSimulation
 
-    docker run --rm -v $(pwd)/results:/gatling/results registry.docker.com/gatling:2.3.1 computerdatabase.BasicSimulation
+    docker run --rm -v $(pwd)/results:/gatling/results registry.homelab.org/gatling:2.3.1 computerdatabase.BasicSimulation
 
-    docker run --rm -v $(pwd)/results:/gatling/results -v $(pwd)/user-files:/gatling/user-files registry.docker.com/gatling:2.3.1 sample.BasicSimulation
+    docker run --rm -v $(pwd)/results:/gatling/results -v $(pwd)/user-files:/gatling/user-files registry.homelab.org/gatling:2.3.1 sample.BasicSimulation
 
 ### Example directories
 

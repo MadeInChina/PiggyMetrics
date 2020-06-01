@@ -1,7 +1,7 @@
 version: '2'
 services:
   turbine:
-    image: registry.docker.com/piggymetrics-turbine:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-turbine:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -9,7 +9,7 @@ services:
     networks:
       - piggynet
   registry:
-    image: registry.docker.com/piggymetrics-registry:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-registry:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -27,20 +27,20 @@ services:
     networks:
       - piggynet
   auth-mongodb:
-    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   account-mongodb:
-    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: password
     networks:
       - piggynet
   monitoring:
-    image: registry.docker.com/piggymetrics-monitoring:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-monitoring:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
@@ -55,25 +55,25 @@ services:
     networks:
     - piggynet
   statistics-mongodb:
-    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
     - piggynet
   notification-mongodb:
-    image: registry.docker.com/piggymetrics-mongodb:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       MONGODB_PASSWORD: password
     networks:
     - piggynet
   config:
-    image: registry.docker.com/piggymetrics-config:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-config:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     networks:
       - piggynet
   gateway:
-    image: registry.docker.com/piggymetrics-gateway:2.3.0.RELEASE
+    image: registry.homelab.org/piggymetrics-gateway:2.3.0.RELEASE
     environment:
       CONFIG_SERVICE_PASSWORD: password
     ports:
