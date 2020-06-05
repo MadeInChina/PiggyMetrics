@@ -4,9 +4,9 @@
 
   <parent>
     <groupId>com.piggymetrics</groupId>
-    <artifactId>infrastructure-services</artifactId>
+    <artifactId>ops-services</artifactId>
     <version>2.3.0.RELEASE</version>
-    <!--<relativePath /> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+    <relativePath>..</relativePath> <!-- lookup parent from repository -->
   </parent>
 
   <groupId>com.piggymetrics</groupId>
