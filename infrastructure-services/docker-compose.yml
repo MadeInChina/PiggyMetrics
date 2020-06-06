@@ -32,7 +32,7 @@ services:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
-  account-mongodb:
+  mongodb:
     image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       INIT_DUMP: account-service-dump.js

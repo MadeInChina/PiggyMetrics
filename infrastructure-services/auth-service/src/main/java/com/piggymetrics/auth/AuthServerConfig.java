@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -16,13 +16,16 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 @Configuration
 @EnableAuthorizationServer
-public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
-  @Autowired private AuthenticationManager authenticationManager;
+  @Autowired
+  private AuthenticationManager authenticationManager;
 
-  @Autowired private MongoUserDetailsService userDetailsService;
+  @Autowired
+  private MongoUserDetailsService userDetailsService;
 
-  @Autowired private Environment env;
+  @Autowired
+  private Environment env;
 
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -69,12 +72,8 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     return enhancer;
   }
 
-  // Troubleshooting
-  // https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#getting-started-experience
-  // java.lang.IllegalArgumentException: There is no PasswordEncoder mapped for the id "null"
-//  @SuppressWarnings("deprecation")
-//  @Bean
-//  public static NoOpPasswordEncoder passwordEncoder() {
-//    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-//  }
+  @Bean
+  public BCryptPasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 }

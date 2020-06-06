@@ -69,7 +69,10 @@ public class UserControllerTest {
   @Test
   public void shouldReturnCurrentUser() throws Exception {
     mockMvc
-        .perform(get("/users/current").principal(new UserPrincipal("test")))
+        .perform(
+            get("/users/current")
+                .accept(MediaType.APPLICATION_JSON)
+                .principal(new UserPrincipal("test")))
         .andExpect(jsonPath("$.name").value("test"))
         .andExpect(status().isOk());
   }

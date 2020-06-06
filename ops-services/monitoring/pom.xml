@@ -9,7 +9,6 @@
         <relativePath>..</relativePath> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.piggymetrics</groupId>
     <artifactId>monitoring</artifactId>
     <packaging>jar</packaging>
 

@@ -1,4 +1,17 @@
 spring:
+#  6/6/2020 5:40:02 PM***************************
+#  6/6/2020 5:40:02 PMAPPLICATION FAILED TO START
+#  6/6/2020 5:40:02 PM***************************
+#  6/6/2020 5:40:02 PM
+#  6/6/2020 5:40:02 PMDescription:
+#  6/6/2020 5:40:02 PM
+#  6/6/2020 5:40:02 PMThe bean 'oauth2ClientContext', defined in class path resource [org/springframework/boot/autoconfigure/security/oauth2/client/OAuth2RestOperationsConfiguration$SingletonScopedConfiguration.class], could not be registered. A bean with that name has already been defined in BeanDefinition defined in org.springframework.security.oauth2.config.annotation.web.configuration.OAuth2ClientConfiguration$OAuth2ClientContextConfiguration and overriding is disabled.
+#  6/6/2020 5:40:02 PM
+#  6/6/2020 5:40:02 PMAction:
+#  6/6/2020 5:40:02 PM
+#  6/6/2020 5:40:02 PMConsider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: account-service
   cloud:

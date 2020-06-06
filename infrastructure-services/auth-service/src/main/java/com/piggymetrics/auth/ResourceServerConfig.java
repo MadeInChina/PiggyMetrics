@@ -11,6 +11,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
   @Override
   public void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests().antMatchers("/actuator/**").permitAll().anyRequest().authenticated();
+    http.authorizeRequests()
+        .antMatchers("/actuator/**", "/uaa/actuator/**")
+        .permitAll()
+        .anyRequest()
+        .authenticated();
   }
 }

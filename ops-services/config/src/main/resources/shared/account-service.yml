@@ -10,7 +10,7 @@ security:
 spring:
   data:
     mongodb:
-      host: account-mongodb
+      host: mongodb
       username: user
       password: ${MONGODB_PASSWORD}
       database: piggymetrics
@@ -21,6 +21,6 @@ server:
     context-path: /accounts
   port: 6000
 
-#logging:
-#  level:
-#    org.springframework.security: DEBUG
+logging:
+  level:
+    org.springframework.security: DEBUG

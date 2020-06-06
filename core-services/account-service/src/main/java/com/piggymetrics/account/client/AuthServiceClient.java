@@ -15,7 +15,7 @@ public interface AuthServiceClient {
   @RequestMapping(
     method = RequestMethod.POST,
     value = "/uaa/users",
-    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
+    consumes = MediaType.APPLICATION_JSON_VALUE
   )
   void createUser(User user);
 }

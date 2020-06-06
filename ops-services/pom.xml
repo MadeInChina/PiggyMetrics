@@ -16,6 +16,7 @@
     <module>admin</module>
     <module>config</module>
     <module>monitoring</module>
+    <module>turbine</module> <!-- https://github.com/spring-cloud/spring-cloud-sleuth/issues/727 -->
   </modules>
 
   <dependencies>

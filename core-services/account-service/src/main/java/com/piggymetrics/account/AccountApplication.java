@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
+//import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
@@ -35,11 +35,11 @@ public class AccountApplication {
     return new ClientCredentialsResourceDetails();
   }
 
-  @Bean
-  public RequestInterceptor oauth2FeignRequestInterceptor() {
-    return new OAuth2FeignRequestInterceptor(
-        new DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
-  }
+//  @Bean
+//  public RequestInterceptor oauth2FeignRequestInterceptor() {
+//    return new OAuth2FeignRequestInterceptor(
+//        new DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
+//  }
 
   @Bean
   public OAuth2RestTemplate clientCredentialsRestTemplate() {

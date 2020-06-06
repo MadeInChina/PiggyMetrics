@@ -9,10 +9,8 @@
     <!--<relativePath /> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
   </parent>
 
-  <groupId>com.piggymetrics</groupId>
   <artifactId>notification-service</artifactId>
   <packaging>jar</packaging>
-
   <name>notification-service</name>
 
   <dependencies>

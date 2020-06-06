@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 /**
@@ -25,7 +24,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
  */
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired private MongoUserDetailsService userDetailsService;
+  @Autowired
+  private MongoUserDetailsService userDetailsService;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
   }
+
   // for @Autowired private AuthenticationManager authenticationManager;
   // Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying
   // bean of type 'org.springframework.security.authentication.AuthenticationManager' available:
@@ -47,12 +48,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return super.authenticationManagerBean();
   }
 
-  // Troubleshooting
-  // https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#getting-started-experience
-  // java.lang.IllegalArgumentException: There is no PasswordEncoder mapped for the id "null"
-  @SuppressWarnings("deprecation")
-  @Bean
-  public static NoOpPasswordEncoder passwordEncoder() {
-    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-  }
 }

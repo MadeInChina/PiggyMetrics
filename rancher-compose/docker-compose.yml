@@ -37,7 +37,7 @@ services:
     networks:
       - piggynet
   tracing:
-    image: openzipkin/zipkin
+    image: openzipkin/zipkin:2.21
     environment:
       RABBIT_ADDRESSES: rabbitmq:5672
     stdin_open: true
@@ -52,7 +52,7 @@ services:
       MONGODB_PASSWORD: password
     networks:
       - piggynet
-  account-mongodb:
+  mongodb:
     image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
     environment:
       INIT_DUMP: account-service-dump.js
@@ -67,7 +67,7 @@ services:
       - 9000:8080/tcp
     networks:
       - piggynet
-  rabbitmq:
+  mongodbmq:
     image: rabbitmq:3-management
     ports:
       - 15672:15672/tcp

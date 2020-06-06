@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.piggymetrics</groupId>
@@ -31,38 +32,38 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Hoxton.SR4</version>
+        <version>Hoxton.SR5</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-<!--  <repositories>-->
-<!--    <repository>-->
-<!--      <id>spring-milestones</id>-->
-<!--      <name>Spring Milestones</name>-->
-<!--      <url>https://repo.spring.io/libs-milestone</url>-->
-<!--      <snapshots>-->
-<!--        <enabled>false</enabled>-->
-<!--      </snapshots>-->
-<!--    </repository>-->
-<!--    <repository>-->
-<!--      <id>spring-snapshots</id>-->
-<!--      <name>Spring Snapshots</name>-->
-<!--      <url>https://repo.spring.io/libs-snapshot</url>-->
-<!--      <snapshots>-->
-<!--        <enabled>true</enabled>-->
-<!--      </snapshots>-->
-<!--    </repository>-->
-<!--    <repository>-->
-<!--      <id>sonatype-nexus-snapshots</id>-->
-<!--      <name>Sonatype Nexus Snapshots</name>-->
-<!--      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
-<!--      <snapshots>-->
-<!--        <enabled>true</enabled>-->
-<!--      </snapshots>-->
-<!--    </repository>-->
-<!--  </repositories>-->
+  <!--  <repositories>-->
+  <!--    <repository>-->
+  <!--      <id>spring-milestones</id>-->
+  <!--      <name>Spring Milestones</name>-->
+  <!--      <url>https://repo.spring.io/libs-milestone</url>-->
+  <!--      <snapshots>-->
+  <!--        <enabled>false</enabled>-->
+  <!--      </snapshots>-->
+  <!--    </repository>-->
+  <!--    <repository>-->
+  <!--      <id>spring-snapshots</id>-->
+  <!--      <name>Spring Snapshots</name>-->
+  <!--      <url>https://repo.spring.io/libs-snapshot</url>-->
+  <!--      <snapshots>-->
+  <!--        <enabled>true</enabled>-->
+  <!--      </snapshots>-->
+  <!--    </repository>-->
+  <!--    <repository>-->
+  <!--      <id>sonatype-nexus-snapshots</id>-->
+  <!--      <name>Sonatype Nexus Snapshots</name>-->
+  <!--      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
+  <!--      <snapshots>-->
+  <!--        <enabled>true</enabled>-->
+  <!--      </snapshots>-->
+  <!--    </repository>-->
+  <!--  </repositories>-->
 
   <dependencies>
     <dependency>
@@ -79,6 +80,24 @@
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-prometheus</artifactId>
       <version>1.5.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.flapdoodle.embed</groupId>
+      <artifactId>de.flapdoodle.embed.mongo</artifactId>
+      <version>1.50.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+      <version>2.2.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

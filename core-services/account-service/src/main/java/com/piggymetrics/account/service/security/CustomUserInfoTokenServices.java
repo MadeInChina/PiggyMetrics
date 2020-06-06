@@ -31,6 +31,7 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
  * <p>By default, it designed to return only user details. This class provides {@link
  * #getRequest(Map)} method, which returns clientId and scope of calling service. This information
  * used in controller's security checks.
+ * @author hanrenwei
  */
 public class CustomUserInfoTokenServices implements ResourceServerTokenServices {
 
