@@ -27,7 +27,7 @@
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -49,6 +49,12 @@
     <dependency>
       <groupId>org.springframework.security.oauth.boot</groupId>
       <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+      <!-- for fix RemoteTokenServices check_token returned active attribute: true spring security oauth2 2.3.4-->
+      <!--      if (!Boolean.TRUE.equals(map.get("active"))) {-->
+      <!--      logger.debug("check_token returned active attribute: " + map.get("active"));-->
+      <!--      throw new InvalidTokenException(accessToken);-->
+      <!--      }-->
+      <version>2.2.7.RELEASE</version>
     </dependency>
 
     <dependency>
@@ -56,10 +62,6 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-bus-amqp</artifactId>

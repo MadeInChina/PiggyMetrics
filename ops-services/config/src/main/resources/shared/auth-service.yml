@@ -12,6 +12,6 @@ server:
     context-path: /uaa
   port: 5000
 
-#logging:
-#  level:
-#    org.springframework.security: DEBUG
+logging:
+  level:
+    org.springframework.security: DEBUG

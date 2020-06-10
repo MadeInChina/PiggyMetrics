@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 /**
@@ -24,17 +25,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  private MongoUserDetailsService userDetailsService;
+  @Autowired private PasswordEncoder passwordEncoder;
+
+  @Autowired private MongoUserDetailsService userDetailsService;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests().anyRequest().authenticated().and().csrf().disable();
+    http.authorizeRequests()
+        .antMatchers("/uaa/oauth/**")
+        .permitAll()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .csrf()
+        .disable();
   }
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+    auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
   }
 
   // for @Autowired private AuthenticationManager authenticationManager;
@@ -42,10 +51,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   // bean of type 'org.springframework.security.authentication.AuthenticationManager' available:
   // expected at least 1 bean which qualifies as autowire candidate. Dependency annotations:
   // {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-  @Override
   @Bean
+  @Override
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
 
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  }
 }

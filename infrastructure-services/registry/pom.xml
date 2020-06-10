@@ -10,27 +10,23 @@
     <relativePath>..</relativePath> <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>com.piggymetrics</groupId>
   <artifactId>registry</artifactId>
   <packaging>jar</packaging>
 
   <name>registry</name>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
     <!-- Adapter for a Eureka Spring Boot Server that allows Prometheus to use its Consul discovery service  -->
     <!-- https://mvnrepository.com/artifact/at.twinformatics/eureka-consul-adapter -->
     <dependency>
       <groupId>at.twinformatics</groupId>
       <artifactId>eureka-consul-adapter</artifactId>
       <version>1.4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
     </dependency>
 
     <dependency>

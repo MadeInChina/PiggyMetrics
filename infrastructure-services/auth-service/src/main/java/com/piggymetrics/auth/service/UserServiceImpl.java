@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
 
   private final Logger log = LoggerFactory.getLogger(getClass());
 
-  private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+  private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Autowired private UserRepository repository;
 
@@ -24,11 +24,10 @@ public class UserServiceImpl implements UserService {
     User existing = repository.findByUsername(user.getUsername()).orElse(null);
     Assert.isNull(existing, "user already exists: " + user.getUsername());
 
-    String hash = encoder.encode(user.getPassword());
-    user.setPassword(hash);
+    String hash = passwordEncoder.encode(user.getPassword());
+    user.setPassword("{bcrypt}" + hash);
 
     repository.save(user);
-
     log.info("new user has been created: {}", user.getUsername());
   }
 }

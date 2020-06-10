@@ -27,7 +27,7 @@ class AuthServiceClientFallbackFactory implements FallbackFactory<AuthServiceCli
   @Override
   public AuthServiceClient create(Throwable cause) {
     return user -> {
-      log.info("fallback; reason was:", cause);
+      log.info("fallback; reason was:", cause.getMessage());
 
       log.info(
           "******** AUTH SERVICE FAILED! - FALLING BACK create username {}", user.getUsername());

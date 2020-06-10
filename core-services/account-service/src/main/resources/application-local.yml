@@ -1,0 +1,45 @@
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#  application:
+#    name: account-service
+#  data:
+#    mongodb:
+#      host: 192.168.2.100
+#      username: user
+#      password: password
+#      database: piggymetrics
+#      port: 27018
+#  rabbitmq:
+#    host: 192.168.2.100
+#
+#logging:
+#  level:
+#    org.springframework.security: DEBUG
+#
+#security:
+#  oauth2:
+#    client:
+#      client-id: account-service
+#      client-secret: "{noop}password"
+#      access-token-uri: http://localhost:5000/uaa/oauth/token
+#      grant-type: client_credentials
+#      scope: server
+#    resource:
+#      user-info-uri: http://localhost:5000/uaa/users/current
+#      token-info-uri: http://localhost:5000/uaa/oauth/check_token
+#
+#
+#eureka:
+#  instance:
+#    metadata-map:
+#      management.context-path: ${server.servlet.context-path:}/actuator
+#    leaseRenewalIntervalInSeconds: 10
+#    status-page-url-path: ${server.servlet.context-path:}/actuator/info
+#    health-check-url-path: ${server.servlet.context-path:}/actuator/health
+#    prefer-ip-address: true
+#    instance-id: ${spring.cloud.client.ip-address}:${server.port:-0} #make the application unique on the rancher service layer
+#  client:
+#    registryFetchIntervalSeconds: 5
+#    serviceUrl:
+#      defaultZone: http://192.168.2.100:8761/eureka/
