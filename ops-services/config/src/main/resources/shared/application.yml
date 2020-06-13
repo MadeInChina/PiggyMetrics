@@ -7,6 +7,11 @@ management:
     health:
       show-details: ALWAYS
 
+#Enables the use of Eureka with Ribbon.
+ribbon:
+  eureka:
+    enabled: true
+
 hystrix:
   command:
     default:
