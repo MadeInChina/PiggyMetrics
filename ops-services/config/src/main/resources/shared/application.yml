@@ -16,8 +16,8 @@ hystrix:
             timeoutInMilliseconds: 10000
   stream:
     maxConcurrentConnections: 20
-# https://github.com/spring-cloud/spring-cloud-netflix/issues/740
-#  if you set hystrix.stream.amqp.send-id=false to allow disabling of sending the context id as the metric id, Turbine AMQP then defaults to serviceId:host:port.
+    # https://github.com/spring-cloud/spring-cloud-netflix/issues/740
+    #  if you set hystrix.stream.amqp.send-id=false to allow disabling of sending the context id as the metric id, Turbine AMQP then defaults to serviceId:host:port.
     queue:
       send-id: false
     bus:
@@ -47,35 +47,40 @@ security:
 
 spring:
   application:
-#  Key: spring.application.index
-#  Reason: Application context ids are now unique by default.
-#   index: ${random.uuid} #make the application unique on the rancher container layer,same service but with multi-instances.
+  #  Key: spring.application.index
+  #  Reason: Application context ids are now unique by default.
+  #   index: ${random.uuid} #make the application unique on the rancher container layer,same service but with multi-instances.
   rabbitmq:
     host: rabbitmq
-#  it's using spring-cloud-starter-bus-amqp in current project which means using mongodbmq as message bus for zipkin
+  cloud:
+    stream:
+      bindings:
+        hystrix-stream-output:
+          destination: turbine
+  #  it's using spring-cloud-starter-bus-amqp in current project which means using mongodbmq as message bus for zipkin
   zipkin:
     base-url: http://tracing:9411
   sleuth:
     sampler:
       probability: 1.0
-#For snapshots version,it's by default
+  #For snapshots version,it's by default
 
-# You can provide the `spring.sleuth.integration.patterns` pattern to explicitly provide the names of channels that you want to include for tracing.
- #-By default, all channels are included.	+By default, all channels but `hystrixStreamOutput` channel are included.
-#Marcin Grzejszczak @marcingrzejszczak 00:59
-#hey @MadeInChina . I’ve fixed spring-cloud/spring-cloud-sleuth#986 . Remove the integration and there’s nothing you should set to make things work. Can you please double check your code against latest snapshots?
-# turns off tracing messaging. https://github.com/spring-cloud/spring-cloud-sleuth/issues/49
-#    integration:
-#      enabled: false
+  # You can provide the `spring.sleuth.integration.patterns` pattern to explicitly provide the names of channels that you want to include for tracing.
+  #-By default, all channels are included.	+By default, all channels but `hystrixStreamOutput` channel are included.
+  #Marcin Grzejszczak @marcingrzejszczak 00:59
+  #hey @MadeInChina . I’ve fixed spring-cloud/spring-cloud-sleuth#986 . Remove the integration and there’s nothing you should set to make things work. Can you please double check your code against latest snapshots?
+  # turns off tracing messaging. https://github.com/spring-cloud/spring-cloud-sleuth/issues/49
+  #    integration:
+  #      enabled: false
 
-#If you use `spring-cloud-sleuth-stream` and `spring-cloud-netflix-hystrix-stream` together, a span is created for each Hystrix metrics and sent to Zipkin.
-#-TIP: If you use `spring-cloud-sleuth-stream` and `spring-cloud-netflix-hystrix-stream` together, a span is created for each Hystrix metrics and sent to Zipkin.
+  #If you use `spring-cloud-sleuth-stream` and `spring-cloud-netflix-hystrix-stream` together, a span is created for each Hystrix metrics and sent to Zipkin.
+  #-TIP: If you use `spring-cloud-sleuth-stream` and `spring-cloud-netflix-hystrix-stream` together, a span is created for each Hystrix metrics and sent to Zipkin.
 
-#+This behavior may be annoying. That's why, by default, `spring.sleuth.scheduled.skipPattern=org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask`.
-#  http://cloud.spring.io/spring-cloud-static/spring-cloud-sleuth/2.0.0.RC1/single/spring-cloud-sleuth.html
-#  If you use spring-cloud-sleuth-stream and spring-cloud-netflix-hystrix-stream together, a span is created for each Hystrix metrics and sent to Zipkin. This behavior may be annoying. You can prevent it by setting spring.sleuth.scheduled.skipPattern=org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
-#    scheduled:
-#      skip-pattern: org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
+  #+This behavior may be annoying. That's why, by default, `spring.sleuth.scheduled.skipPattern=org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask`.
+  #  http://cloud.spring.io/spring-cloud-static/spring-cloud-sleuth/2.0.0.RC1/single/spring-cloud-sleuth.html
+  #  If you use spring-cloud-sleuth-stream and spring-cloud-netflix-hystrix-stream together, a span is created for each Hystrix metrics and sent to Zipkin. This behavior may be annoying. You can prevent it by setting spring.sleuth.scheduled.skipPattern=org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
+  #    scheduled:
+  #      skip-pattern: org.springframework.cloud.netflix.hystrix.stream.HystrixStreamTask
   boot:
     admin:
       discovery:
@@ -86,11 +91,12 @@ feign:
     enabled: true
 
 logging:
-  file: /app/log/application.log
+  file:
+    name: /app/log/application.log
   pattern:
     file: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"
   level:
     org.springframework.security: DEBUG
-#    org.springframework.cloud.sleuth: DEBUG
-#    org.springframework.cloud.netflix.turbine: DEBUG
-#    org.springframework.cloud.netflix.hystrix: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
+    org.springframework.cloud.netflix.turbine: DEBUG
+    org.springframework.cloud.netflix.hystrix: DEBUG

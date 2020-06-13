@@ -1,3 +1,12 @@
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: ALWAYS
+#
 #spring:
 #  main:
 #    allow-bean-definition-overriding: true
@@ -12,22 +21,33 @@
 #      port: 27018
 #  rabbitmq:
 #    host: 192.168.2.100
+#  zipkin:
+#    base-url: http://192.168.2.100:9411
+#
+#server:
+#  servlet:
+#    context-path: /accounts
+#
+#  cloud:
+#    stream:
+#      override-cloud-connectors: true
 #
 #logging:
 #  level:
 #    org.springframework.security: DEBUG
+#
 #
 #security:
 #  oauth2:
 #    client:
 #      client-id: account-service
 #      client-secret: "{noop}password"
-#      access-token-uri: http://localhost:5000/uaa/oauth/token
+#      access-token-uri: http://192.168.2.100:5000/uaa/oauth/token
 #      grant-type: client_credentials
 #      scope: server
 #    resource:
-#      user-info-uri: http://localhost:5000/uaa/users/current
-#      token-info-uri: http://localhost:5000/uaa/oauth/check_token
+#      user-info-uri: http://192.168.2.100:5000/uaa/users/current
+#      token-info-uri: http://192.168.2.100:5000/uaa/oauth/check_token
 #
 #
 #eureka:
