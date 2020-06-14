@@ -1,0 +1,133 @@
+version: '2'
+services:
+  registry:
+    image: registry.homelab.org/piggymetrics-registry:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    ports:
+      - 8761:8761/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  turbine:
+    image: registry.homelab.org/piggymetrics-turbine:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    external_links:
+      - data-warehouse/rabbitmq3:rabbitmq
+    ports:
+      - 8300:8080/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  tracing:
+    image: registry.homelab.org/openzipkin/zipkin:2.21
+    environment:
+      RABBIT_ADDRESSES: rabbitmq:5672
+    external_links:
+      - data-warehouse/rabbitmq3:rabbitmq
+    ports:
+      - 9411:9411/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  statistics-service:
+    image: registry.homelab.org/piggymetrics-statistics-service:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+      STATISTICS_SERVICE_PASSWORD: '{noop}password'
+      MONGODB_PASSWORD: password
+    external_links:
+      - data-warehouse/rabbitmq3:rabbitmq
+      - tools/fixer-api:fixer-api
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  admin:
+    image: registry.homelab.org/piggymetrics-admin:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    ports:
+      - 8200:8080/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  monitoring:
+    image: registry.homelab.org/piggymetrics-monitoring:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    ports:
+      - 9000:8080/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  notification-service:
+    image: registry.homelab.org/piggymetrics-notification-service:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+      NOTIFICATION_SERVICE_PASSWORD: '{noop}password'
+      MONGODB_PASSWORD: password
+    external_links:
+      - data-warehouse/rabbitmq3:rabbitmq
+    labels:
+      io.rancher.scheduler.affinity:host_label: application=true
+  auth-service:
+    image: registry.homelab.org/piggymetrics-auth-service:2.3.0.RELEASE
+    environment:
+      ACCOUNT_SERVICE_PASSWORD: '{noop}password'
+      CONFIG_SERVICE_PASSWORD: password
+      MONGODB_PASSWORD: password
+      NOTIFICATION_SERVICE_PASSWORD: '{noop}password'
+      STATISTICS_SERVICE_PASSWORD: '{noop}password'
+    external_links:
+      - data-warehouse/rabbitmq3:rabbitmq
+    ports:
+      - 5000:5000/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  debian:
+    image: registry.homelab.org/debian:buster
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.scheduler.affinity:host_label: application=true
+  account-service:
+    image: registry.homelab.org/piggymetrics-account-service:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+      ACCOUNT_SERVICE_PASSWORD: '{noop}password'
+      MONGODB_PASSWORD: password
+    external_links:
+      - data-warehouse/rabbitmq3:rabbitmq
+    ports:
+      - 6000:6000/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  config:
+    image: registry.homelab.org/piggymetrics-config:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    external_links:
+      - data-warehouse/rabbitmq3:rabbitmq
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true
+  mongodb:
+    image: registry.homelab.org/piggymetrics-mongodb:2.3.0.RELEASE
+    environment:
+      MONGODB_PASSWORD: password
+    ports:
+      - 27018:27017/tcp
+    labels:
+      io.rancher.scheduler.affinity:host_label: application=true
+  gateway:
+    image: registry.homelab.org/piggymetrics-gateway:2.3.0.RELEASE
+    environment:
+      CONFIG_SERVICE_PASSWORD: password
+    ports:
+      - 4000:4000/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: application=true

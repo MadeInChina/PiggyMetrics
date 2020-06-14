@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/shared
+  profiles:
+    active: native
+  security:
+    user:
+      username: user
+      password: ${CONFIG_SERVICE_PASSWORD}
+  rabbitmq:
+    host: rabbitmq
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port:-0} #make the application unique on the rancher service layer
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka/
+
+server:
+  port: 8888

@@ -7,11 +7,6 @@ management:
     health:
       show-details: ALWAYS
 
-#Enables the use of Eureka with Ribbon.
-ribbon:
-  eureka:
-    enabled: true
-
 hystrix:
   command:
     default:
@@ -43,6 +38,7 @@ eureka:
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
+    fetch-registry: true
 
 security:
   oauth2:
@@ -62,6 +58,10 @@ spring:
       bindings:
         hystrix-stream-output:
           destination: turbine
+    #The recommended implementation is BlockingLoadBalancerClient - add org.springframework.cloud:spring-cloud-loadbalancer in order to use it.
+    loadbalancer:
+      ribbon:
+        enabled: false
   #  it's using spring-cloud-starter-bus-amqp in current project which means using mongodbmq as message bus for zipkin
   zipkin:
     base-url: http://tracing:9411

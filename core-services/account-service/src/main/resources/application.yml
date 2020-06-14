@@ -23,14 +23,15 @@
 #    host: 192.168.2.100
 #  zipkin:
 #    base-url: http://192.168.2.100:9411
+##The recommended implementation is BlockingLoadBalancerClient - add org.springframework.cloud:spring-cloud-loadbalancer in order to use it.
+#  cloud:
+#    loadbalancer:
+#      ribbon:
+#        enabled: false
 #
 #server:
 #  servlet:
 #    context-path: /accounts
-#
-#  cloud:
-#    stream:
-#      override-cloud-connectors: true
 #
 #logging:
 #  level:
@@ -63,3 +64,4 @@
 #    registryFetchIntervalSeconds: 5
 #    serviceUrl:
 #      defaultZone: http://192.168.2.100:8761/eureka/
+#    fetch-registry: true
