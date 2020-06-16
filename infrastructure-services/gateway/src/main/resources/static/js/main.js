@@ -836,7 +836,7 @@ function launchStatistic() {
         $(".bottompage").css({"display": "block"});
 
         // Fill objects form Savings fields
-        savings.percent = $("#percentvalue").autoNumeric("get");
+        savings.percent = $("#percentvalue").autoNumeric('init', { options }).autoNumeric("get");
         savings.deposit = $("#deposit").prop("checked");
         savings.capitalization = $("#capitalization").prop("checked");
 
