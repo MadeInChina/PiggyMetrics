@@ -6,6 +6,10 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+#for https://grafana.com/grafana/dashboards/4701
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 hystrix:
   command:

@@ -1,40 +1,38 @@
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout: 20000
-
-zuul:
-  ignoredServices: '*'
-  host:
-    connect-timeout-millis: 20000
-    socket-timeout-millis: 20000
-    max-per-route-connections: 2000
-    max-total-connections: 2000
-
-  routes:
-    auth-service:
-        path: /uaa/**
-        #url: http://auth-service:5000
-        serviceId: auth-service
-        stripPrefix: false
-        sensitiveHeaders:
-
-    account-service:
-        path: /accounts/**
-        serviceId: account-service
-        stripPrefix: false
-        sensitiveHeaders:
-
-    statistics-service:
-        path: /statistics/**
-        serviceId: statistics-service
-        stripPrefix: false
-        sensitiveHeaders:
-
-    notification-service:
-        path: /notifications/**
-        serviceId: notification-service
-        stripPrefix: false
-        sensitiveHeaders:
+spring:
+  cloud:
+    #The recommended implementation is BlockingLoadBalancerClient - add org.springframework.cloud:spring-cloud-loadbalancer in order to use it.
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      routes:
+        # This route rule used to forward request to
+        # auth-service
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/uaa/**
+        # account-service
+        - id: account-service
+          uri: lb://account-service
+          predicates:
+            - Path=/accounts/**
+        # statistics-service
+        - id: statistics-service
+          uri: lb://statistics-service
+          predicates:
+            - Path=/statistics/**
+        # notification-service
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/notification/**
+        - id: default
+          uri: forward:/index.html
+          predicates:
+            - Path=/
 
 server:
   port: 4000
+  #6/29/2020 1:08:17 PMio.netty.handler.codec.TooLongFrameException: HTTP header is larger than 8192 bytes.
+  max-http-header-size: 102400
